@@ -215,4 +215,12 @@ public class ViewModelTests {
 
         assertTrue(logOutput.matches(".*" + LogOutput.SET_BIT_PRESSED + ".*"));
     }
+
+    @Test
+    public void logHasNoMessageForBitSetIfArrayNotCreated() {
+        viewModel.inputBitProperty().set("0");
+        viewModel.setBit();
+
+        assertEquals(0, viewModel.getLog().size());
+    }
 }
