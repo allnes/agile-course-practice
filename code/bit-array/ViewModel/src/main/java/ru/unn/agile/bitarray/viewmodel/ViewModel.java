@@ -137,8 +137,7 @@ public class ViewModel {
 
         log.add(LogOutput.CREATE_BIT_ARRAY_PRESSED
                 + "Operation input: "
-                + arrayInputStr
-                + '\n');
+                + arrayInputStr);
     }
 
     public void setBit() {
@@ -154,8 +153,7 @@ public class ViewModel {
 
         log.add(LogOutput.SET_BIT_PRESSED
                 + "Operation input: "
-                + bitInputStr
-                + '\n');
+                + bitInputStr);
     }
 
     public void unsetBit() {
@@ -171,8 +169,7 @@ public class ViewModel {
 
         log.add(LogOutput.UNSET_BIT_PRESSED
                 + "Operation input: "
-                + bitInputStr
-                + '\n');
+                + bitInputStr);
     }
 
     private class ValueChangeListener implements ChangeListener<String> {
@@ -182,13 +179,11 @@ public class ViewModel {
             fieldInputArrayStatus.set(getFieldInputArrayStatus().toString());
             log.add(LogOutput.INPUT_CHANGED
                     + "Field input array changed with new value:"
-                    + newValue
-                    + '\n');
+                    + newValue);
             fieldInputBitStatus.set(getFieldInputBitStatus().toString());
             log.add(LogOutput.INPUT_CHANGED
                     + "Field input bit changed with new value:"
-                    + newValue
-                    + '\n');
+                    + newValue);
         }
     }
 }
