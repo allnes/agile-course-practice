@@ -9,7 +9,7 @@ import java.util.List;
 public class SimpleLogger implements LoggerInterface {
     private final String fileName;
     private BufferedWriter bufferedWriter = null;
-    private static Integer msgCounter = 0;
+    private Integer msgCounter = 0;
 
     public SimpleLogger(final String logFileName) {
         fileName = logFileName;

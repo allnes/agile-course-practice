@@ -48,4 +48,13 @@ public class SimpleLoggerTests {
 
         assertTrue(logOutputs.get(logOutputs.size() - 1).matches(".*" + logOutput + ".*"));
     }
+
+    @Test
+    public void loggingAddsCounter() {
+        final String logOutput = "Log is a good good boy!";
+
+        logger.add(logOutput);
+        var logOutputs = logger.get();
+        assertTrue(logOutputs.get(logOutputs.size() - 1).matches("^#0: .*"));
+    }
 }
