@@ -196,6 +196,9 @@ public class ViewModelTests {
 
     @Test
     public void logHasMessageForBitArrayCreation() {
+        viewModel.inputBitArrayProperty().set("0");
+        viewModel.create();
+
         String logOutput = viewModel.getLog().get(0);
 
         assertTrue(logOutput.matches(".*" + LogOutput.CREATE_BIT_ARRAY_PRESSED + ".*"));

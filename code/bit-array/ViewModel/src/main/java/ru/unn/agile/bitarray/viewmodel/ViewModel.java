@@ -134,6 +134,8 @@ public class ViewModel {
         }
         fieldBitArrayProperty();
         fieldInputArrayStatus.set(Status.SUCCESS.toString());
+
+        log.add(LogOutput.CREATE_BIT_ARRAY_PRESSED + "Operation input: " + arrayInputStr);
     }
 
     public void setBit() {
