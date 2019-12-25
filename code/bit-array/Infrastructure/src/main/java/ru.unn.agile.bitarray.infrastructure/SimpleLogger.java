@@ -9,6 +9,7 @@ import java.util.List;
 public class SimpleLogger implements LoggerInterface {
     private final String fileName;
     private BufferedWriter bufferedWriter = null;
+    private static Integer msgCounter = 0;
 
     public SimpleLogger(final String logFileName) {
         fileName = logFileName;
@@ -24,8 +25,9 @@ public class SimpleLogger implements LoggerInterface {
     public void add(final String s) {
         if (bufferedWriter != null) {
             try {
-                bufferedWriter.write(s);
+                bufferedWriter.write("#" + msgCounter.toString() + ": " + s);
                 bufferedWriter.flush();
+                ++msgCounter;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -45,7 +47,7 @@ public class SimpleLogger implements LoggerInterface {
     }
 
     private List<String> readLogFileLineByLine(BufferedReader reader) {
-        List<String> logEntity = new ArrayList<String>();
+        List<String> logEntity = new ArrayList<>();
 
         try {
             var line = reader.readLine();
