@@ -11,7 +11,7 @@ public class ViewModelTests {
 
     @Before
     public void setUp() {
-        viewModel = new ViewModel();
+        viewModel = new ViewModel(new MockLogger());
     }
 
     @After

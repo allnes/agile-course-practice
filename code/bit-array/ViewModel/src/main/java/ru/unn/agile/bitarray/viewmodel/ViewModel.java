@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ViewModel {
+    private LoggerInterface log;
     private final List<ValueChangeListener> valueChangedListeners = new ArrayList<>();
 
     private final StringProperty inputBitArray = new SimpleStringProperty();
@@ -26,7 +27,12 @@ public class ViewModel {
 
     private BitArray bitArray;
 
-    public ViewModel() {
+    public ViewModel(final LoggerInterface log) {
+        if (log == null) {
+            throw new IllegalArgumentException("Log can't be null");
+        }
+        this.log = log;
+
         inputBit.set("");
         inputBitArray.set("");
         fieldBitArray.set("");
