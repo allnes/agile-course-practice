@@ -8,20 +8,28 @@ import java.util.List;
 
 public class SimpleLogger implements LoggerInterface {
     private final String fileName;
+    private BufferedWriter bufferedWriter = null;
 
     public SimpleLogger(final String logFileName) {
         fileName = logFileName;
 
         try {
-            new BufferedWriter(new FileWriter(logFileName));
+            bufferedWriter = new BufferedWriter(new FileWriter(logFileName));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void add(String s) {
-
+    public void add(final String s) {
+        if (bufferedWriter != null) {
+            try {
+                bufferedWriter.write(s);
+                bufferedWriter.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
