@@ -189,8 +189,15 @@ public class ViewModelTests {
 
     @Test
     public void logHasNothingBeforeAnyOp() {
-        LoggerInterface log = viewModel.getLog();
+        var log = viewModel.getLog();
 
-        assertEquals(0, log.get().size());
+        assertEquals(0, log.size());
+    }
+
+    @Test
+    public void logHasMessageForBitArrayCreation() {
+        String logOutput = viewModel.getLog().get(0);
+
+        assertTrue(logOutput.matches(".*" + LogOutput.CREATE_BIT_ARRAY_PRESSED + ".*"));
     }
 }

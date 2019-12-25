@@ -62,8 +62,8 @@ public class ViewModel {
         return inputBit;
     }
 
-    public LoggerInterface getLog() {
-        return log;
+    public List<String> getLog() {
+        return log.get();
     }
 
     public StringProperty fieldBitArrayProperty() {
@@ -185,4 +185,12 @@ enum Status {
     public String toString() {
         return name;
     }
+}
+
+final class LogOutput {
+    final static public String CREATE_BIT_ARRAY_PRESSED = "Created array. ";
+    final static public String SET_BIT_PRESSED = "Bit set. ";
+    final static public String UNSET_BIT_ARRAY_PRESSED = "Bit unset. ";
+    final static public String INPUT_CHANGED = "Input changed. ";
+    private LogOutput() { }
 }
