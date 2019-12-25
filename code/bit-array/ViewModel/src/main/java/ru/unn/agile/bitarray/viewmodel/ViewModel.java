@@ -171,7 +171,9 @@ public class ViewModel {
         public void changed(final ObservableValue<? extends String> observable,
                             final String oldValue, final String newValue) {
             fieldInputArrayStatus.set(getFieldInputArrayStatus().toString());
+            log.add(LogOutput.INPUT_CHANGED + "Field input array changed with new value:" + newValue);
             fieldInputBitStatus.set(getFieldInputBitStatus().toString());
+            log.add(LogOutput.INPUT_CHANGED + "Field input bit changed with new value:" + newValue);
         }
     }
 }

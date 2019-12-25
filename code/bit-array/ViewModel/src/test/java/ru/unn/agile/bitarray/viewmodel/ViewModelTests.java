@@ -199,7 +199,7 @@ public class ViewModelTests {
         viewModel.inputBitArrayProperty().set("0");
         viewModel.create();
 
-        String logOutput = viewModel.getLog().get(0);
+        String logOutput = viewModel.getLog().get(viewModel.getLog().size() - 1);
 
         assertTrue(logOutput.matches(".*" + LogOutput.CREATE_BIT_ARRAY_PRESSED + ".*"));
     }
@@ -211,7 +211,7 @@ public class ViewModelTests {
         viewModel.inputBitProperty().set("0");
         viewModel.setBit();
 
-        String logOutput = viewModel.getLog().get(1);
+        String logOutput = viewModel.getLog().get(viewModel.getLog().size() - 1);
 
         assertTrue(logOutput.matches(".*" + LogOutput.SET_BIT_PRESSED + ".*"));
     }
@@ -223,24 +223,17 @@ public class ViewModelTests {
         viewModel.inputBitProperty().set("0");
         viewModel.unsetBit();
 
-        String logOutput = viewModel.getLog().get(1);
+        String logOutput = viewModel.getLog().get(viewModel.getLog().size() - 1);
 
         assertTrue(logOutput.matches(".*" + LogOutput.UNSET_BIT_PRESSED + ".*"));
     }
 
     @Test
-    public void logHasNoMessageForBitSetIfArrayNotCreated() {
+    public void logHasMessageForBitPropertyChanging() {
         viewModel.inputBitProperty().set("0");
-        viewModel.setBit();
 
-        assertEquals(0, viewModel.getLog().size());
-    }
+        String logOutput = viewModel.getLog().get(viewModel.getLog().size() - 1);
 
-    @Test
-    public void logHasNoMessageForBitUnsetIfArrayNotCreated() {
-        viewModel.inputBitProperty().set("0");
-        viewModel.unsetBit();
-
-        assertEquals(0, viewModel.getLog().size());
+        assertTrue(logOutput.matches(".*" + LogOutput.INPUT_CHANGED + ".*"));
     }
 }
