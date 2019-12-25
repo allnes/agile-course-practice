@@ -135,7 +135,10 @@ public class ViewModel {
         fieldBitArrayProperty();
         fieldInputArrayStatus.set(Status.SUCCESS.toString());
 
-        log.add(LogOutput.CREATE_BIT_ARRAY_PRESSED + "Operation input: " + arrayInputStr);
+        log.add(LogOutput.CREATE_BIT_ARRAY_PRESSED
+                + "Operation input: "
+                + arrayInputStr
+                + '\n');
     }
 
     public void setBit() {
@@ -149,7 +152,10 @@ public class ViewModel {
         fieldBitArrayProperty();
         fieldInputBitStatus.set(Status.SUCCESS.toString());
 
-        log.add(LogOutput.SET_BIT_PRESSED + "Operation input: " + bitInputStr);
+        log.add(LogOutput.SET_BIT_PRESSED
+                + "Operation input: "
+                + bitInputStr
+                + '\n');
     }
 
     public void unsetBit() {
@@ -163,7 +169,10 @@ public class ViewModel {
         fieldBitArrayProperty();
         fieldInputBitStatus.set(Status.SUCCESS.toString());
 
-        log.add(LogOutput.UNSET_BIT_PRESSED + "Operation input: " + bitInputStr);
+        log.add(LogOutput.UNSET_BIT_PRESSED
+                + "Operation input: "
+                + bitInputStr
+                + '\n');
     }
 
     private class ValueChangeListener implements ChangeListener<String> {
@@ -171,9 +180,15 @@ public class ViewModel {
         public void changed(final ObservableValue<? extends String> observable,
                             final String oldValue, final String newValue) {
             fieldInputArrayStatus.set(getFieldInputArrayStatus().toString());
-            log.add(LogOutput.INPUT_CHANGED + "Field input array changed with new value:" + newValue);
+            log.add(LogOutput.INPUT_CHANGED
+                    + "Field input array changed with new value:"
+                    + newValue
+                    + '\n');
             fieldInputBitStatus.set(getFieldInputBitStatus().toString());
-            log.add(LogOutput.INPUT_CHANGED + "Field input bit changed with new value:" + newValue);
+            log.add(LogOutput.INPUT_CHANGED
+                    + "Field input bit changed with new value:"
+                    + newValue
+                    + '\n');
         }
     }
 }
@@ -196,9 +211,9 @@ enum Status {
 }
 
 final class LogOutput {
-    final static public String CREATE_BIT_ARRAY_PRESSED = "Created array. ";
-    final static public String SET_BIT_PRESSED = "Bit set. ";
-    final static public String UNSET_BIT_PRESSED = "Bit unset. ";
-    final static public String INPUT_CHANGED = "Input changed. ";
+    public static final String CREATE_BIT_ARRAY_PRESSED = "Created array. ";
+    public static final String SET_BIT_PRESSED = "Bit set. ";
+    public static final String UNSET_BIT_PRESSED = "Bit unset. ";
+    public static final String INPUT_CHANGED = "Input changed. ";
     private LogOutput() { }
 }
