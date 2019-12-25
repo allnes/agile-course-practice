@@ -217,6 +217,18 @@ public class ViewModelTests {
     }
 
     @Test
+    public void logHasMessageForBitUnSet() {
+        viewModel.inputBitArrayProperty().set("0");
+        viewModel.create();
+        viewModel.inputBitProperty().set("0");
+        viewModel.unsetBit();
+
+        String logOutput = viewModel.getLog().get(1);
+
+        assertTrue(logOutput.matches(".*" + LogOutput.UNSET_BIT_PRESSED + ".*"));
+    }
+
+    @Test
     public void logHasNoMessageForBitSetIfArrayNotCreated() {
         viewModel.inputBitProperty().set("0");
         viewModel.setBit();
