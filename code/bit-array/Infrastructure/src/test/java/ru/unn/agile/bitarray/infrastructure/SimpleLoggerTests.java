@@ -32,4 +32,13 @@ public class SimpleLoggerTests {
         }
     }
 
+    @Test
+    public void canLogMessage() {
+        final String logOutput = "Log is a good boy!";
+
+        logger.add(logOutput);
+        var logOutputs = logger.get();
+
+        assertTrue(logOutputs.get(logOutputs.size() - 1).matches(".*" + logOutput + ".*"));
+    }
 }
