@@ -29,7 +29,7 @@ public class ViewModel {
 
     public ViewModel(final LoggerInterface log) {
         if (log == null) {
-            throw new IllegalArgumentException("Log can't be null");
+            throw new IllegalArgumentException("Log parameter must be set not to null");
         }
         this.log = log;
 

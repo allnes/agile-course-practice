@@ -173,4 +173,16 @@ public class ViewModelTests {
 
         assertNotEquals(input, viewModel.fieldBitArrayProperty().get().toString());
     }
+
+    @Test
+    public void ctorWithNullLogThrows() {
+        try {
+            new ViewModel(null);
+            fail("Exception wasn't thrown");
+        } catch (IllegalArgumentException ex) {
+            assertEquals("Log parameter must be set not to null", ex.getMessage());
+        } catch (Exception ex) {
+            fail("Unknown exception type for incorrect log in ctor");
+        }
+    }
 }
