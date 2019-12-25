@@ -46,7 +46,7 @@ public class SimpleLogger implements LoggerInterface {
         return readLogFileLineByLine(reader);
     }
 
-    private List<String> readLogFileLineByLine(BufferedReader reader) {
+    private List<String> readLogFileLineByLine(final BufferedReader reader) {
         List<String> logEntity = new ArrayList<>();
 
         try {
