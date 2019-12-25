@@ -7,6 +7,6 @@ public class SimpleLoggerTestsWithViewModel extends ViewModelTests {
     @Override
     public void setUp() {
         SimpleLogger realLogger = new SimpleLogger("SimpleLoggerTestsWithViewModel.log");
-        viewModel = new ViewModel(realLogger);
+        super.setViewModel(new ViewModel(realLogger));
     }
 }

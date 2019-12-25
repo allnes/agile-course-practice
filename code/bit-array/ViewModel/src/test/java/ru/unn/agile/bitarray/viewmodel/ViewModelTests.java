@@ -7,7 +7,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ViewModelTests {
-    protected ViewModel viewModel;
+    private ViewModel viewModel;
+
+    protected void setViewModel(final ViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
 
     @Before
     public void setUp() {
