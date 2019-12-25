@@ -62,6 +62,10 @@ public class ViewModel {
         return inputBit;
     }
 
+    public LoggerInterface getLog() {
+        return log;
+    }
+
     public StringProperty fieldBitArrayProperty() {
         if (bitArray != null) {
             StringBuilder stringBuilder = new StringBuilder();

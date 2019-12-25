@@ -3,6 +3,7 @@ package ru.unn.agile.bitarray.viewmodel;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import static org.junit.Assert.*;
 
@@ -184,5 +185,12 @@ public class ViewModelTests {
         } catch (Exception ex) {
             fail("Unknown exception type for incorrect log in ctor");
         }
+    }
+
+    @Test
+    public void logHasNothingBeforeAnyOp() {
+        LoggerInterface log = viewModel.getLog();
+
+        assertEquals(0, log.get().size());
     }
 }
