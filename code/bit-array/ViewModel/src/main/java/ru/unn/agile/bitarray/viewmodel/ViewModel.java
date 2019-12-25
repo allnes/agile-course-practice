@@ -162,6 +162,8 @@ public class ViewModel {
 
         fieldBitArrayProperty();
         fieldInputBitStatus.set(Status.SUCCESS.toString());
+
+        log.add(LogOutput.UNSET_BIT_PRESSED + "Operation input: " + bitInputStr);
     }
 
     private class ValueChangeListener implements ChangeListener<String> {
