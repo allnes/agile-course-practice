@@ -209,6 +209,7 @@ public class ViewModelTests {
         viewModel.inputBitArrayProperty().set("0");
         viewModel.create();
         viewModel.inputBitProperty().set("0");
+        viewModel.setBit();
 
         String logOutput = viewModel.getLog().get(1);
 

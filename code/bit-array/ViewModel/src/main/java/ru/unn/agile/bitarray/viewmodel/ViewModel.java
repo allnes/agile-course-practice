@@ -148,6 +148,8 @@ public class ViewModel {
 
         fieldBitArrayProperty();
         fieldInputBitStatus.set(Status.SUCCESS.toString());
+
+        log.add(LogOutput.SET_BIT_PRESSED + "Operation input: " + bitInputStr);
     }
 
     public void unsetBit() {
