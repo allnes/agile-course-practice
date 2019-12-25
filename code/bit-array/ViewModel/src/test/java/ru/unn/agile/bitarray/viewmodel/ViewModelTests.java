@@ -203,4 +203,15 @@ public class ViewModelTests {
 
         assertTrue(logOutput.matches(".*" + LogOutput.CREATE_BIT_ARRAY_PRESSED + ".*"));
     }
+
+    @Test
+    public void logHasMessageForBitSet() {
+        viewModel.inputBitArrayProperty().set("0");
+        viewModel.create();
+        viewModel.inputBitProperty().set("0");
+
+        String logOutput = viewModel.getLog().get(1);
+
+        assertTrue(logOutput.matches(".*" + LogOutput.SET_BIT_PRESSED + ".*"));
+    }
 }
