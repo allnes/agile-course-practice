@@ -236,4 +236,13 @@ public class ViewModelTests {
 
         assertTrue(logOutput.matches(".*" + LogOutput.INPUT_CHANGED + ".*"));
     }
+
+    @Test
+    public void logHasMessageForArrayBitPropertyChanging() {
+        viewModel.inputBitArrayProperty().set("00");
+
+        String logOutput = viewModel.getLog().get(viewModel.getLog().size() - 1);
+
+        assertTrue(logOutput.matches(".*" + LogOutput.INPUT_CHANGED + ".*"));
+    }
 }
