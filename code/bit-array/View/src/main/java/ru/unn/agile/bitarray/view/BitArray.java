@@ -4,10 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import ru.unn.agile.bitarray.infrastructure.SimpleLogger;
 import ru.unn.agile.bitarray.viewmodel.ViewModel;
 
 public class BitArray {
-    @FXML
     private ViewModel viewModel;
 
     @FXML
@@ -31,6 +31,8 @@ public class BitArray {
 
     @FXML
     void initialize() {
+        viewModel = new ViewModel(new SimpleLogger("./bit_array.log"));
+
         labelStatusArray.textProperty().bind(viewModel.fieldInputArrayStatusProperty());
         labelStatusBit.textProperty().bind(viewModel.fieldInputBitStatusProperty());
 

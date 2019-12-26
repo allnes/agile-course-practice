@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ViewModel {
+    private LoggerInterface log;
     private final List<ValueChangeListener> valueChangedListeners = new ArrayList<>();
 
     private final StringProperty inputBitArray = new SimpleStringProperty();
@@ -26,7 +27,12 @@ public class ViewModel {
 
     private BitArray bitArray;
 
-    public ViewModel() {
+    public ViewModel(final LoggerInterface log) {
+        if (log == null) {
+            throw new IllegalArgumentException("Log parameter must be set not to null");
+        }
+        this.log = log;
+
         inputBit.set("");
         inputBitArray.set("");
         fieldBitArray.set("");
@@ -54,6 +60,10 @@ public class ViewModel {
 
     public StringProperty inputBitProperty() {
         return inputBit;
+    }
+
+    public List<String> getLog() {
+        return log.get();
     }
 
     public StringProperty fieldBitArrayProperty() {
@@ -124,6 +134,10 @@ public class ViewModel {
         }
         fieldBitArrayProperty();
         fieldInputArrayStatus.set(Status.SUCCESS.toString());
+
+        log.add(LogOutput.CREATE_BIT_ARRAY_PRESSED
+                + "Operation input: "
+                + arrayInputStr);
     }
 
     public void setBit() {
@@ -136,6 +150,10 @@ public class ViewModel {
 
         fieldBitArrayProperty();
         fieldInputBitStatus.set(Status.SUCCESS.toString());
+
+        log.add(LogOutput.SET_BIT_PRESSED
+                + "Operation input: "
+                + bitInputStr);
     }
 
     public void unsetBit() {
@@ -148,6 +166,10 @@ public class ViewModel {
 
         fieldBitArrayProperty();
         fieldInputBitStatus.set(Status.SUCCESS.toString());
+
+        log.add(LogOutput.UNSET_BIT_PRESSED
+                + "Operation input: "
+                + bitInputStr);
     }
 
     private class ValueChangeListener implements ChangeListener<String> {
@@ -155,7 +177,13 @@ public class ViewModel {
         public void changed(final ObservableValue<? extends String> observable,
                             final String oldValue, final String newValue) {
             fieldInputArrayStatus.set(getFieldInputArrayStatus().toString());
+            log.add(LogOutput.INPUT_CHANGED
+                    + "Field input array changed with new value:"
+                    + newValue);
             fieldInputBitStatus.set(getFieldInputBitStatus().toString());
+            log.add(LogOutput.INPUT_CHANGED
+                    + "Field input bit changed with new value:"
+                    + newValue);
         }
     }
 }
@@ -175,4 +203,12 @@ enum Status {
     public String toString() {
         return name;
     }
+}
+
+final class LogOutput {
+    public static final String CREATE_BIT_ARRAY_PRESSED = "Created array. ";
+    public static final String SET_BIT_PRESSED = "Bit set. ";
+    public static final String UNSET_BIT_PRESSED = "Bit unset. ";
+    public static final String INPUT_CHANGED = "Input changed. ";
+    private LogOutput() { }
 }

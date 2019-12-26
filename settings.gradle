@@ -234,6 +234,8 @@ include "code/bit-array/View"
 project(":code/bit-array/View").name = "bit-array-View"
 include "code/bit-array/ViewModel"
 project(":code/bit-array/ViewModel").name = "bit-array-ViewModel"
+include "code/bit-array/Infrastructure"
+project(":code/bit-array/Infrastructure").name = "bit-array-Infrastructure"
 // Нечесанов Владимир
 // Петров Кирилл - polynomialcalculator
 include "code/polynomial-calculator/Model"

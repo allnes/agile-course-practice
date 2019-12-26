@@ -9,9 +9,13 @@ import static org.junit.Assert.*;
 public class ViewModelTests {
     private ViewModel viewModel;
 
+    protected void setViewModel(final ViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
     @Before
     public void setUp() {
-        viewModel = new ViewModel();
+        viewModel = new ViewModel(new MockLogger());
     }
 
     @After
@@ -172,5 +176,76 @@ public class ViewModelTests {
         viewModel.unsetBit();
 
         assertNotEquals(input, viewModel.fieldBitArrayProperty().get().toString());
+    }
+
+    @Test
+    public void ctorWithNullLogThrows() {
+        try {
+            new ViewModel(null);
+            fail("Exception wasn't thrown");
+        } catch (IllegalArgumentException ex) {
+            assertEquals("Log parameter must be set not to null", ex.getMessage());
+        } catch (Exception ex) {
+            fail("Unknown exception type for incorrect log in ctor");
+        }
+    }
+
+    @Test
+    public void logHasNothingBeforeAnyOp() {
+        var log = viewModel.getLog();
+
+        assertEquals(0, log.size());
+    }
+
+    @Test
+    public void logHasMessageForBitArrayCreation() {
+        viewModel.inputBitArrayProperty().set("0");
+        viewModel.create();
+
+        String logOutput = viewModel.getLog().get(viewModel.getLog().size() - 1);
+
+        assertTrue(logOutput.matches(".*" + LogOutput.CREATE_BIT_ARRAY_PRESSED + ".*"));
+    }
+
+    @Test
+    public void logHasMessageForBitSet() {
+        viewModel.inputBitArrayProperty().set("0");
+        viewModel.create();
+        viewModel.inputBitProperty().set("0");
+        viewModel.setBit();
+
+        String logOutput = viewModel.getLog().get(viewModel.getLog().size() - 1);
+
+        assertTrue(logOutput.matches(".*" + LogOutput.SET_BIT_PRESSED + ".*"));
+    }
+
+    @Test
+    public void logHasMessageForBitUnset() {
+        viewModel.inputBitArrayProperty().set("0");
+        viewModel.create();
+        viewModel.inputBitProperty().set("0");
+        viewModel.unsetBit();
+
+        String logOutput = viewModel.getLog().get(viewModel.getLog().size() - 1);
+
+        assertTrue(logOutput.matches(".*" + LogOutput.UNSET_BIT_PRESSED + ".*"));
+    }
+
+    @Test
+    public void logHasMessageForBitPropertyChanging() {
+        viewModel.inputBitProperty().set("0");
+
+        String logOutput = viewModel.getLog().get(viewModel.getLog().size() - 1);
+
+        assertTrue(logOutput.matches(".*" + LogOutput.INPUT_CHANGED + ".*"));
+    }
+
+    @Test
+    public void logHasMessageForArrayBitPropertyChanging() {
+        viewModel.inputBitArrayProperty().set("00");
+
+        String logOutput = viewModel.getLog().get(viewModel.getLog().size() - 1);
+
+        assertTrue(logOutput.matches(".*" + LogOutput.INPUT_CHANGED + ".*"));
     }
 }
