@@ -1,6 +1,8 @@
-package ru.unn.agile.salarycalculator.view.legacy;
+package ru.unn.agile.salarycalculator.view;
 
-import ru.unn.agile.salarycalculator.viewmodel.legacy.ViewModel;
+import ru.unn.agile.salarycalculator.viewmodel.ILogger;
+import ru.unn.agile.salarycalculator.viewmodel.ViewModel;
+import ru.unn.agile.salarycalculator.infrastructure.TextLogger;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -15,6 +17,7 @@ public final class SalaryCalculatorView {
     private JButton calculateButton;
     private JLabel lbStatus;
     private JTextField txtCountMonth;
+    private JTextArea textAreaLogs;
     private ViewModel viewModel;
 
     private SalaryCalculatorView() {
@@ -25,11 +28,15 @@ public final class SalaryCalculatorView {
         backBind();
         salaryCalculatorActionListener();
         salaryCalculatorKeyAdapter();
+
+        textAreaLogs.setText("Logs will be here");
     }
 
     public static void main(final String[] args) {
         JFrame frame = new JFrame("SalaryCalculatorView");
-        frame.setContentPane(new SalaryCalculatorView(new ViewModel()).mainPanel);
+        ILogger logger = new TextLogger("salaryWorkLog.txt");
+        ViewModel viewModel = new ViewModel(logger);
+        frame.setContentPane(new SalaryCalculatorView(viewModel).mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -46,6 +53,7 @@ public final class SalaryCalculatorView {
         calculateButton.setEnabled(viewModel.isCalculateButtonEnable());
         txtResult.setText(viewModel.getResult());
         lbStatus.setText(viewModel.getStatus());
+        textAreaLogs.setText(viewModel.getLogs());
     }
 
     private void salaryCalculatorActionListener() {

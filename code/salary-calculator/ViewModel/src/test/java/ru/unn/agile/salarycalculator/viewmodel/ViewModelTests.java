@@ -1,9 +1,9 @@
-package ru.unn.agile.salarycalculator.viewmodel.legacy;
+package ru.unn.agile.salarycalculator.viewmodel;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import ru.unn.agile.salarycalculator.viewmodel.legacy.ViewModel.Status;
+import ru.unn.agile.salarycalculator.viewmodel.ViewModel.Status;
 
 import static org.junit.Assert.*;
 
@@ -11,9 +11,14 @@ public class ViewModelTests {
     private final double delta = 0.01;
     private ViewModel viewModel;
 
+    public void setExternalViewModel(final ViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
     @Before
     public void setUpEmptyExample() {
-        viewModel = new ViewModel();
+        ILogger fakeLogger = new FakeTextLogger();
+        viewModel = new ViewModel(fakeLogger);
     }
 
     @After
@@ -23,7 +28,8 @@ public class ViewModelTests {
 
     @Test
     public void checkStatusInBegin() {
-        viewModel = new ViewModel();
+        ILogger logger = new FakeTextLogger();
+        viewModel = new ViewModel(logger);
         assertEquals(Status.COUNT_WAITING, viewModel.getStatus());
     }
 

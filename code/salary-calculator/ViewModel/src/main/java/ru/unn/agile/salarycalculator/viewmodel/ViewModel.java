@@ -1,8 +1,9 @@
-package ru.unn.agile.salarycalculator.viewmodel.legacy;
+package ru.unn.agile.salarycalculator.viewmodel;
 
 import ru.unn.agile.salarycalculator.model.SalaryCalculator;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Locale;
 
 public class ViewModel {
@@ -17,9 +18,12 @@ public class ViewModel {
     private String countYear;
     private String result;
     private String status;
+    private ILogger logger;
     private boolean isCalculateButtonEnabled;
 
-    public ViewModel() {
+    public ViewModel(final ILogger logger) {
+        this.logger = logger;
+
         salary = "";
         workedHours = "";
         countMonth = "";
@@ -86,6 +90,7 @@ public class ViewModel {
                 Integer.parseInt(countMonth), 1));
         result = getMoneyFormatInCashValue(calculator);
         status = Status.CASH;
+        logger.log("Calculate salary: " + result);
     }
 
     private String getMoneyFormatInCashValue(final SalaryCalculator countPeriod) {
@@ -97,19 +102,30 @@ public class ViewModel {
     }
 
     public void setSalary(final String inSalary) {
+        if (this.salary.length() != inSalary.length()) {
+            logger.log("Set salary: " + inSalary);
+        }
         this.salary = inSalary;
     }
 
-
     public void setWorkedHours(final String inWorkedHours) {
+        if (this.workedHours.length() != inWorkedHours.length()) {
+            logger.log("Set worked hours: " + inWorkedHours);
+        }
         this.workedHours = inWorkedHours;
     }
 
     public void setCountMonth(final String inCountMonth) {
+        if (this.countMonth.length() != inCountMonth.length()) {
+            logger.log("Set count month: " + inCountMonth);
+        }
         this.countMonth = inCountMonth;
     }
 
     public void setCountYear(final String inCountYear) {
+        if (this.countYear.length() != inCountYear.length()) {
+            logger.log("Set count year: " + inCountYear);
+        }
         this.countYear = inCountYear;
     }
 
@@ -119,6 +135,17 @@ public class ViewModel {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getLogs() {
+        List<String> logs = logger.getLog();
+        StringBuilder outputLog = new StringBuilder("");
+        for (String log : logs) {
+            outputLog.append(log);
+            outputLog.append("\n");
+        }
+
+        return outputLog.toString();
     }
 
     private boolean isWorkedHoursCorrect() {
