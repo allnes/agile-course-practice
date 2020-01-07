@@ -1,14 +1,11 @@
 package ru.unn.agile.interpolationsearch.view;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import ru.unn.agile.interpolationsearch.infrastructure.TxtLogger;
 import ru.unn.agile.interpolationsearch.viewmodel.ViewModel;
 
 import java.io.IOException;
-import java.util.List;
 
 public class InterpolationSearch {
     @FXML
