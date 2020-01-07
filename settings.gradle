@@ -262,6 +262,12 @@ project(":code/dijkstra-algorithm/ViewModel").name = "dijkstra-algorithm-ViewMod
 // Смирнов Егор
 include "code/priority-queue"
 project(":code/priority-queue").name = "priority-queue"
+include "code/interpolationsearch/Model"
+project(":code/interpolationsearch/Model").name = "interpolationsearch-model"
+include "code/interpolationsearch/View"
+project(":code/interpolationsearch/View").name = "interpolationsearch-view"
+include "code/interpolationsearch/ViewModel"
+project(":code/interpolationsearch/ViewModel").name = "interpolationsearch-viewmodel"
 // Тамилина Дарья
 // polygon-area
 include "code/polygon-area/Model"
