@@ -2,6 +2,7 @@ package ru.unn.agile.interpolationsearch.infrastructure;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.internal.matchers.Null;
 
 import java.io.*;
 import java.util.List;
@@ -15,7 +16,7 @@ public class TxtLoggerTests {
     private TxtLogger txtLogger;
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         txtLogger = new TxtLogger(FILE_NAME);
     }
 
@@ -25,16 +26,12 @@ public class TxtLoggerTests {
     }
 
     @Test
-    public void canCreateLogFileOnDisk() {
-        try {
-            new BufferedReader(new FileReader(FILE_NAME));
-        } catch (FileNotFoundException e) {
-            fail("File " + FILE_NAME + " wasn't found!");
-        }
+    public void canCreateLogFileOnDisk() throws FileNotFoundException {
+        new BufferedReader(new FileReader(FILE_NAME));
     }
 
     @Test
-    public void dateAndTimeContainInLog() {
+    public void dateAndTimeContainInLog() throws IOException {
         String testMessage = "Test message for check";
 
         txtLogger.log(testMessage);
@@ -44,7 +41,7 @@ public class TxtLoggerTests {
     }
 
     @Test
-    public void canWriteOneLogMessage() {
+    public void canWriteOneLogMessage() throws IOException {
         String testMessage = "Test message #1";
 
         txtLogger.log(testMessage);
@@ -54,7 +51,7 @@ public class TxtLoggerTests {
     }
 
     @Test
-    public void canWriteSeveralLogMessages() {
+    public void canWriteSeveralLogMessages() throws IOException {
         String[] testMessagesString = {"Test message #1, Test message #2"};
 
         for (String testMessage : testMessagesString) {
@@ -62,8 +59,7 @@ public class TxtLoggerTests {
         }
 
         List<String> logMessages = txtLogger.getLogList();
-        for (int i = 0; i < logMessages.size(); i++) {
-            String logMessage = logMessages.get(i);
+        for (String logMessage : logMessages) {
             assertTrue(logMessage.matches(".*" + logMessage + "$"));
         }
     }

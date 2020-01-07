@@ -4,6 +4,7 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import ru.unn.agile.interpolationsearch.model.InterpolationSearch;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -49,7 +50,7 @@ public class ViewModel {
         init();
     }
 
-    public ViewModel(final ILogger logger) {
+    public ViewModel(final ILogger logger) throws IOException {
         setLogger(logger);
         this.logger = logger;
         logger.log("Start");
@@ -63,11 +64,11 @@ public class ViewModel {
         this.logger = logger;
     }
 
-    public final List<String> getLog() {
+    public final List<String> getLog() throws IOException {
         return logger.getLogList();
     }
 
-    public void addNumber() {
+    public void addNumber() throws IOException {
         if (!isNumberCorrect()) {
             result.set("Incorrect number");
             logger.log("Element is incorrect");
@@ -81,7 +82,7 @@ public class ViewModel {
         }
     }
 
-    public void doSearch() {
+    public void doSearch() throws IOException {
         if (!isSearchValueCorrect()) {
             result.set("Incorrect value for search");
             logger.log("List is not sorted");

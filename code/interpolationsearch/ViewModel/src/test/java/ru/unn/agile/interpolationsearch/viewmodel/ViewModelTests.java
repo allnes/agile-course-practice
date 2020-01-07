@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -16,7 +17,7 @@ public class ViewModelTests {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException {
         viewModel = new ViewModel(new FakeLogger());
     }
 
@@ -29,19 +30,19 @@ public class ViewModelTests {
         viewModel.numberProperty().set(n.toString());
     }
 
-    private void addNumber(final Integer n) {
+    private void addNumber(final Integer n) throws IOException {
         setNumber(n);
         viewModel.addNumber();
     }
 
     @Test
-    public void isAddingValidInput() {
+    public void isAddingValidInput() throws IOException {
         addNumber(1);
         assertEquals(Integer.valueOf(1), viewModel.getArray().get(0));
     }
 
     @Test
-    public void isAddingMultipleValidInput() {
+    public void isAddingMultipleValidInput() throws IOException {
         addNumber(1);
         addNumber(2);
         assertEquals(Integer.valueOf(1), viewModel.getArray().get(0));
@@ -49,7 +50,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void canDoSearch() {
+    public void canDoSearch() throws IOException {
         addNumber(1);
         addNumber(2);
         addNumber(3);
@@ -59,21 +60,21 @@ public class ViewModelTests {
     }
 
     @Test
-    public void canHandleEmptyList() {
+    public void canHandleEmptyList() throws IOException {
         viewModel.searchValueProperty().set(Integer.toString(2));
         viewModel.doSearch();
         assertEquals("Empty list", viewModel.getResult());
     }
 
     @Test
-    public void canHandleBadNumbers() {
+    public void canHandleBadNumbers() throws IOException {
         viewModel.numberProperty().set("2.5");
         viewModel.addNumber();
         assertEquals("Incorrect number", viewModel.getResult());
     }
 
     @Test
-    public void canHandleBadValues() {
+    public void canHandleBadValues() throws IOException {
         addNumber(1);
         addNumber(2);
         viewModel.searchValueProperty().set("2.5");
@@ -82,7 +83,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void canHandleUnsortedArray() {
+    public void canHandleUnsortedArray() throws IOException {
         addNumber(2);
         addNumber(1);
         viewModel.searchValueProperty().set("2");
@@ -91,7 +92,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void canHandleBadSearch() {
+    public void canHandleBadSearch() throws IOException {
         addNumber(1);
         addNumber(2);
         viewModel.searchValueProperty().set("3");
@@ -100,13 +101,13 @@ public class ViewModelTests {
     }
 
     @Test
-    public void canSetDefaultLog() {
+    public void canSetDefaultLog() throws IOException {
         List<String> message = viewModel.getLog();
         assertEquals("Start", viewModel.getLog().get(0));
     }
 
     @Test
-    public void correctLogWhenAddedElement() {
+    public void correctLogWhenAddedElement() throws IOException {
         viewModel.numberProperty().set("2");
         viewModel.addNumber();
 
@@ -114,7 +115,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void correctLogWhenElementIsIncorrect() {
+    public void correctLogWhenElementIsIncorrect() throws IOException {
         viewModel.numberProperty().set("2.5");
         viewModel.addNumber();
 
@@ -122,7 +123,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void correctLogWhenSearchUnexistKey() {
+    public void correctLogWhenSearchUnexistKey() throws IOException {
         addNumber(1);
         addNumber(2);
         viewModel.searchValueProperty().set("2");
@@ -134,7 +135,7 @@ public class ViewModelTests {
     }
 
     @Test
-    public void correctLogWhenEmptyList() {
+    public void correctLogWhenEmptyList() throws IOException {
         viewModel.searchValueProperty().set("2");
         viewModel.doSearch();
 

@@ -2,10 +2,7 @@ package ru.unn.agile.interpolationsearch.infrastructure;
 
 import ru.unn.agile.interpolationsearch.viewmodel.ILogger;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,55 +10,43 @@ import java.util.List;
 import java.util.Locale;
 
 public class TxtLogger implements ILogger {
-    private static final String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
+    private static final String FORMAT_CURRENT_TIME = "yyyy-MM-dd HH:mm:ss";
     private final BufferedWriter writer;
     private final String filename;
 
-    public TxtLogger(final String filename) {
-        this.filename = filename;
-
+    public TxtLogger(final String filename) throws IOException {
         BufferedWriter logWriter = null;
-        try {
-            logWriter = new BufferedWriter(new FileWriter(filename));
-        } catch (Exception error) {
-            error.printStackTrace();
-        }
+        logWriter = new BufferedWriter(new FileWriter(filename));
+
+        this.filename = filename;
         writer = logWriter;
     }
 
     @Override
-    public void log(final String logMessage) {
-        try {
-            writer.write(now() + " > " + logMessage);
-            writer.newLine();
-            writer.flush();
-        } catch (Exception error) {
-            System.out.println(error.getMessage());
-        }
+    public void log(final String logMessage) throws IOException {
+        writer.write(now() + " > " + logMessage);
+        writer.newLine();
+        writer.flush();
     }
 
     @Override
-    public List<String> getLogList() {
-
+    public List<String> getLogList() throws IOException {
         ArrayList<String> log = new ArrayList<String>();
         BufferedReader reader;
 
-        try {
-            reader = new BufferedReader(new FileReader(filename));
-            String line = reader.readLine();
-            while (line != null) {
-                log.add(line);
-                line = reader.readLine();
-            }
-        } catch (Exception error) {
-            System.out.println(error.getMessage());
+        reader = new BufferedReader(new FileReader(filename));
+        String line = reader.readLine();
+        while (line != null) {
+            log.add(line);
+            line = reader.readLine();
         }
+
         return log;
     }
 
     private static String now() {
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW, Locale.ENGLISH);
+        SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_CURRENT_TIME, Locale.ENGLISH);
         return sdf.format(cal.getTime());
     }
 }
