@@ -23,14 +23,14 @@ public class TxtLogger implements ILogger {
     }
 
     @Override
-    public void log(final String logMessage) throws IOException {
+    public void addingLog(final String logMessage) throws IOException {
         writer.write(now() + " > " + logMessage);
         writer.newLine();
         writer.flush();
     }
 
     @Override
-    public List<String> getLogList() throws IOException {
+    public List<String> getLoggingList() throws IOException {
         ArrayList<String> log = new ArrayList<String>();
         BufferedReader reader;
 

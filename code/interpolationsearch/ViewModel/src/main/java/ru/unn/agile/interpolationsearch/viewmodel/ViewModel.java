@@ -53,7 +53,7 @@ public class ViewModel {
     public ViewModel(final ILogger logger) throws IOException {
         setLogger(logger);
         this.logger = logger;
-        logger.log("Start");
+        logger.addingLog("Start");
         init();
     }
 
@@ -65,15 +65,15 @@ public class ViewModel {
     }
 
     public final List<String> getLog() throws IOException {
-        return logger.getLogList();
+        return logger.getLoggingList();
     }
 
     public void addNumber() throws IOException {
         if (!isNumberCorrect()) {
             result.set("Incorrect number");
-            logger.log("Element is incorrect");
+            logger.addingLog("Element is incorrect");
         } else {
-            logger.log("Element was added");
+            logger.addingLog("Element was added");
             Integer n = Integer.parseInt(number.get());
             numbersList.add(n);
             numbersListProperty.add(n.toString());
@@ -85,10 +85,10 @@ public class ViewModel {
     public void doSearch() throws IOException {
         if (!isSearchValueCorrect()) {
             result.set("Incorrect value for search");
-            logger.log("List is not sorted");
+            logger.addingLog("List is not sorted");
         } else if (numbersList.isEmpty()) {
             result.set("Empty list");
-            logger.log("List is Empty");
+            logger.addingLog("List is Empty");
         } else {
             try {
                 Integer v = Integer.parseInt(valueToSearch.get());
@@ -96,10 +96,10 @@ public class ViewModel {
                 numbersList.toArray(arr);
                 int res = InterpolationSearch.find(arr, v);
                 result.set(Integer.toString(res));
-                logger.log("Element is found");
+                logger.addingLog("Element is found");
             } catch (Exception e) {
                 result.setValue(e.getMessage());
-                logger.log("Element not found");
+                logger.addingLog("Element not found");
             }
         }
     }

@@ -18,7 +18,7 @@ public class ViewModelTests {
 
     @Before
     public void setUp() throws IOException {
-        viewModel = new ViewModel(new FakeLogger());
+        viewModel = new ViewModel(new LogFaker());
     }
 
     @After

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ILogger {
-    void log(String logMessage) throws IOException;
+    void addingLog(String logMessage) throws IOException;
 
-    List<String> getLogList() throws IOException;
+    List<String> getLoggingList() throws IOException;
 }

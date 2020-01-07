@@ -2,7 +2,6 @@ package ru.unn.agile.interpolationsearch.infrastructure;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.internal.matchers.Null;
 
 import java.io.*;
 import java.util.List;
@@ -34,9 +33,9 @@ public class TxtLoggerTests {
     public void dateAndTimeContainInLog() throws IOException {
         String testMessage = "Test message for check";
 
-        txtLogger.log(testMessage);
+        txtLogger.addingLog(testMessage);
 
-        String logMessage = txtLogger.getLogList().get(0);
+        String logMessage = txtLogger.getLoggingList().get(0);
         assertTrue(logMessage.matches("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} > .*"));
     }
 
@@ -44,9 +43,9 @@ public class TxtLoggerTests {
     public void canWriteOneLogMessage() throws IOException {
         String testMessage = "Test message #1";
 
-        txtLogger.log(testMessage);
+        txtLogger.addingLog(testMessage);
 
-        String logMessage = txtLogger.getLogList().get(0);
+        String logMessage = txtLogger.getLoggingList().get(0);
         assertTrue(logMessage.matches(".*" + logMessage + "$"));
     }
 
@@ -55,10 +54,10 @@ public class TxtLoggerTests {
         String[] testMessagesString = {"Test message #1, Test message #2"};
 
         for (String testMessage : testMessagesString) {
-            txtLogger.log(testMessage);
+            txtLogger.addingLog(testMessage);
         }
 
-        List<String> logMessages = txtLogger.getLogList();
+        List<String> logMessages = txtLogger.getLoggingList();
         for (String logMessage : logMessages) {
             assertTrue(logMessage.matches(".*" + logMessage + "$"));
         }
