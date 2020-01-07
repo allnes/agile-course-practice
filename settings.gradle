@@ -294,6 +294,8 @@ include "code/interpolationsearch/View"
 project(":code/interpolationsearch/View").name = "interpolationsearch-view"
 include "code/interpolationsearch/ViewModel"
 project(":code/interpolationsearch/ViewModel").name = "interpolationsearch-viewmodel"
+include "code/interpolationsearch/Infrastructure"
+project(":code/interpolationsearch/Infrastructure").name = "interpolationsearch-infrastructure"
 // Тамилина Дарья
 // polygon-area
 include "code/polygon-area/Model"
