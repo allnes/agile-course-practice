@@ -102,8 +102,9 @@ public class ViewModelTests {
 
     @Test
     public void canSetDefaultLog() throws IOException {
-        List<String> message = viewModel.getLog();
-        assertEquals("Start", viewModel.getLog().get(0));
+        var message = viewModel.getLog().get(0);
+
+        assertTrue(message.matches(".*Start"));
     }
 
     @Test
@@ -111,7 +112,9 @@ public class ViewModelTests {
         viewModel.numberProperty().set("2");
         viewModel.addNumber();
 
-        assertEquals("Element was added", viewModel.getLog().get(1));
+        var message = viewModel.getLog().get(1);
+
+        assertTrue(message.matches(".*Element was added"));
     }
 
     @Test
@@ -119,7 +122,9 @@ public class ViewModelTests {
         viewModel.numberProperty().set("2.5");
         viewModel.addNumber();
 
-        assertEquals("Element is incorrect", viewModel.getLog().get(1));
+        var message = viewModel.getLog().get(1);
+
+        assertTrue(message.matches(".*Element is incorrect"));
     }
 
     @Test
@@ -131,7 +136,7 @@ public class ViewModelTests {
 
         var message = viewModel.getLog().get(3);
 
-        assertEquals("Element is found", message);
+        assertTrue(message.matches(".*Element is found"));
     }
 
     @Test
@@ -141,6 +146,6 @@ public class ViewModelTests {
 
         var message = viewModel.getLog().get(1);
 
-        assertEquals("List is Empty", message);
+        assertTrue(message.matches(".*List is Empty"));
     }
 }
