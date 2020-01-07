@@ -1,6 +1,5 @@
 package ru.unn.agile.interpolationsearch.viewmodel;
 
-import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import ru.unn.agile.interpolationsearch.model.InterpolationSearch;
