@@ -4,14 +4,20 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class ViewModelTests {
     private ViewModel viewModel;
 
+    public void setOuterViewModel(final ViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
     @Before
     public void setUp() {
-        viewModel = new ViewModel();
+        viewModel = new ViewModel(new FakeLogger());
     }
 
     @After
@@ -91,5 +97,49 @@ public class ViewModelTests {
         viewModel.searchValueProperty().set("3");
         viewModel.doSearch();
         assertEquals("Cannot find element '3' in array.", viewModel.getResult());
+    }
+
+    @Test
+    public void canSetDefaultLog() {
+        List<String> message = viewModel.getLog();
+        assertEquals("Start", viewModel.getLog().get(0));
+    }
+
+    @Test
+    public void correctLogWhenAddedElement() {
+        viewModel.numberProperty().set("2");
+        viewModel.addNumber();
+
+        assertEquals("Element was added", viewModel.getLog().get(1));
+    }
+
+    @Test
+    public void correctLogWhenElementIsIncorrect() {
+        viewModel.numberProperty().set("2.5");
+        viewModel.addNumber();
+
+        assertEquals("Element is incorrect", viewModel.getLog().get(1));
+    }
+
+    @Test
+    public void correctLogWhenSearchUnexistKey() {
+        addNumber(1);
+        addNumber(2);
+        viewModel.searchValueProperty().set("2");
+        viewModel.doSearch();
+
+        var message = viewModel.getLog().get(3);
+
+        assertEquals("Element is found", message);
+    }
+
+    @Test
+    public void correctLogWhenEmptyList() {
+        viewModel.searchValueProperty().set("2");
+        viewModel.doSearch();
+
+        var message = viewModel.getLog().get(1);
+
+        assertEquals("List is Empty", message);
     }
 }

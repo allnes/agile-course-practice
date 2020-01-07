@@ -28,6 +28,8 @@ public class ViewModel {
         return numbersListProperty;
     }
 
+    private ILogger logger;
+
     private boolean isNumberCorrect() {
         String n = number.get();
         return (NUMBER_INPUT_ALLOWED_SYMBOLS.matcher(n).matches());
@@ -38,15 +40,39 @@ public class ViewModel {
         return (VALUE_TO_SEARCH_INPUT_ALLOWED_SYMBOLS.matcher(v).matches());
     }
 
-    public ViewModel() {
+    private void init() {
         numbersListProperty.set(FXCollections.observableArrayList());
         clearFormInput();
+    }
+
+    public ViewModel() {
+        init();
+    }
+
+    public ViewModel(final ILogger logger) {
+        setLogger(logger);
+        this.logger = logger;
+        logger.log("Start");
+        init();
+    }
+
+    public final void setLogger(final ILogger logger) {
+        if (logger == null) {
+            throw new IllegalArgumentException("Logger parameter can't be null");
+        }
+        this.logger = logger;
+    }
+
+    public final List<String> getLog() {
+        return logger.getLogList();
     }
 
     public void addNumber() {
         if (!isNumberCorrect()) {
             result.set("Incorrect number");
+            logger.log("Element is incorrect");
         } else {
+            logger.log("Element was added");
             Integer n = Integer.parseInt(number.get());
             numbersList.add(n);
             numbersListProperty.add(n.toString());
@@ -58,18 +84,21 @@ public class ViewModel {
     public void doSearch() {
         if (!isSearchValueCorrect()) {
             result.set("Incorrect value for search");
+            logger.log("List is not sorted");
         } else if (numbersList.isEmpty()) {
             result.set("Empty list");
+            logger.log("List is Empty");
         } else {
             try {
                 Integer v = Integer.parseInt(valueToSearch.get());
                 var arr = new Integer[numbersList.size()];
                 numbersList.toArray(arr);
-
                 int res = InterpolationSearch.find(arr, v);
                 result.set(Integer.toString(res));
+                logger.log("Element is found");
             } catch (Exception e) {
                 result.setValue(e.getMessage());
+                logger.log("Element not found");
             }
         }
     }

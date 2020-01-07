@@ -1,8 +1,13 @@
 package ru.unn.agile.interpolationsearch.view;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import ru.unn.agile.interpolationsearch.infrastructure.TxtLogger;
 import ru.unn.agile.interpolationsearch.viewmodel.ViewModel;
+
+import java.util.List;
 
 public class InterpolationSearch {
     @FXML
@@ -22,6 +27,7 @@ public class InterpolationSearch {
 
     @FXML
     void initialize() {
+        viewModel.setLogger(new TxtLogger("./TxtLogger-lab3.log"));
         numberTextField.textProperty().bindBidirectional(viewModel.numberProperty());
         searchValueTextField.textProperty().bindBidirectional(viewModel.searchValueProperty());
 
