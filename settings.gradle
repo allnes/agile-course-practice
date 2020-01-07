@@ -246,9 +246,6 @@ include "code/polynomial-calculator/View"
 project(":code/polynomial-calculator/View").name = "polynomial-calculator-view"
 include "code/polynomial-calculator/ViewModel"
 project(":code/polynomial-calculator/ViewModel").name = "polynomial-calculator-viewmodel"
-// Петров Кирил
-include "code/interpolationsearch"
-project(":code/interpolationsearch").name = "interpolationsearch"
 // Повеликин Ростислав
 include "code/red-black-tree"
 project(":code/red-black-tree").name = "red-black-tree-Model"
@@ -290,6 +287,13 @@ project(":code/dijkstra-algorithm/Infrastructure").name = "dijkstra-algorithm-In
 // Смирнов Егор
 include "code/priority-queue"
 project(":code/priority-queue").name = "priority-queue"
+// Interpolation Search
+include "code/interpolationsearch/Model"
+project(":code/interpolationsearch/Model").name = "interpolationsearch-model"
+include "code/interpolationsearch/View"
+project(":code/interpolationsearch/View").name = "interpolationsearch-view"
+include "code/interpolationsearch/ViewModel"
+project(":code/interpolationsearch/ViewModel").name = "interpolationsearch-viewmodel"
 // Тамилина Дарья
 // polygon-area
 include "code/polygon-area/Model"
