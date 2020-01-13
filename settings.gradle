@@ -143,6 +143,8 @@ include "code/numbers-to-words/View"
 project(":code/numbers-to-words/View").name = "numbers-to-words-View"
 include "code/numbers-to-words/ViewModel"
 project(":code/numbers-to-words/ViewModel").name = "numbers-to-words-ViewModel"
+include "code/numbers-to-words/Infrastructure"
+project(":code/numbers-to-words/Infrastructure").name = "numbers-to-words-Infrastructure"
 
 
 // Deposit Calculator
