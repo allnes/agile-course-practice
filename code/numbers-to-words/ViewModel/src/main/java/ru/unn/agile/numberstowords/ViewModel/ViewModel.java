@@ -1,4 +1,4 @@
-package ru.unn.agile.numberstowords.viewmodel;
+package ru.unn.agile.numberstowords.ViewModel;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -9,8 +9,10 @@ public class ViewModel {
     private final StringProperty numberInput = new SimpleStringProperty();
     private final StringProperty textOutput = new SimpleStringProperty();
     private final StringProperty status = new SimpleStringProperty();
+    private final ILogger logger;
 
-    public ViewModel() {
+    public ViewModel(final ILogger logger) {
+        this.logger = logger;
         numberInput.set("");
         textOutput.set("");
         status.set("");

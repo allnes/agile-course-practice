@@ -1,8 +1,9 @@
-package ru.unn.agile.numberstowords.viewmodel;
+package ru.unn.agile.numberstowords.ViewModel;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import ru.unn.agile.numberstowords.viewmodel.FakeLogger;
 
 import static org.junit.Assert.*;
 
@@ -11,7 +12,8 @@ public class ViewModelTests {
 
     @Before
     public void setUp() {
-        viewModel = new ViewModel();
+        FakeLogger logger = new FakeLogger();
+        viewModel = new ViewModel(logger);
     }
 
     @After
@@ -69,5 +71,13 @@ public class ViewModelTests {
         viewModel.convert();
 
         assertEquals("", viewModel.statusProperty().get());
+    }
+
+    @Test
+    public void canCreateViewModelWithLogger() {
+        FakeLogger logger = new FakeLogger();
+        ViewModel viewModelLogged = new ViewModel(logger);
+
+        assertNotNull(viewModelLogged);
     }
 }
