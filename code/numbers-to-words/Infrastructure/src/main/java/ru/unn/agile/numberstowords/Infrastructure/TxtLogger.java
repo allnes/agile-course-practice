@@ -34,17 +34,6 @@ public class TxtLogger implements ILogger {
     }
 
     @Override
-    public void log(final String s) {
-        try {
-            String logMessage = getDateNow() + " :\t" + s + "\n";
-            writer.write(logMessage);
-            writer.flush();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    @Override
     public List<String> getLog() {
         ArrayList<String> log = new ArrayList<String>();
 
@@ -61,5 +50,16 @@ public class TxtLogger implements ILogger {
         }
 
         return log;
+    }
+
+    @Override
+    public void log(final String s) {
+        try {
+            String logMessage = getDateNow() + " :\t" + s + "\n";
+            writer.write(logMessage);
+            writer.flush();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
