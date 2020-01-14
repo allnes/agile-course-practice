@@ -1,4 +1,4 @@
-package ru.unn.agile.numberstowords.Infrastructure;
+package ru.unn.agile.numberstowords.infrastructure;
 
 import org.junit.Before;
 import org.junit.Test;

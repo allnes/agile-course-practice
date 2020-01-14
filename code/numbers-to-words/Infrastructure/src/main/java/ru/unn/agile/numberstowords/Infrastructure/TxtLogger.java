@@ -1,6 +1,6 @@
-package ru.unn.agile.numberstowords.Infrastructure;
+package ru.unn.agile.numberstowords.infrastructure;
 
-import ru.unn.agile.numberstowords.ViewModel.ILogger;
+import ru.unn.agile.numberstowords.viewmodel.ILogger;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

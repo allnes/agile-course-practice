@@ -1,7 +1,5 @@
 package ru.unn.agile.numberstowords.viewmodel;
 
-import ru.unn.agile.numberstowords.ViewModel.ILogger;
-
 import java.util.ArrayList;
 import java.util.List;
 

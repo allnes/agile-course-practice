@@ -1,4 +1,4 @@
-package ru.unn.agile.numberstowords.ViewModel;
+package ru.unn.agile.numberstowords.viewmodel;
 
 import java.util.List;
 

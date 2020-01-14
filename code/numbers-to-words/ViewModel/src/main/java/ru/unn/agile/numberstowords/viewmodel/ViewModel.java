@@ -1,4 +1,4 @@
-package ru.unn.agile.numberstowords.ViewModel;
+package ru.unn.agile.numberstowords.viewmodel;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -11,17 +11,29 @@ public class ViewModel {
     private final StringProperty numberInput = new SimpleStringProperty();
     private final StringProperty textOutput = new SimpleStringProperty();
     private final StringProperty status = new SimpleStringProperty();
-    private final ILogger logger;
+    private final StringProperty logs = new SimpleStringProperty();
+    private ILogger logger;
+
+    public ViewModel() {
+        init();
+    }
 
     public ViewModel(final ILogger logger) {
-        if (logger == null) {
-            throw new IllegalArgumentException("Logger parameter can't be null");
-        }
+        init();
+        setLogger(logger);
+    }
 
-        this.logger = logger;
+    private void init() {
         numberInput.set("");
         textOutput.set("");
         status.set("");
+    }
+
+    public final void setLogger(final ILogger logger) {
+        if (logger == null) {
+            throw new IllegalArgumentException("Logger parameter can't be null");
+        }
+        this.logger = logger;
     }
 
     public StringProperty numberInputProperty() {
@@ -34,6 +46,14 @@ public class ViewModel {
 
     public StringProperty statusProperty() {
         return status;
+    }
+
+    public StringProperty logsProperty() {
+        return logs;
+    }
+
+    public final String getLogs() {
+        return logs.get();
     }
 
     public List<String> getLog() {
@@ -54,20 +74,33 @@ public class ViewModel {
                 + "Input: \"" + numberInput.get() + "\".";
     }
 
+    private void updateLogs() {
+        List<String> fullLog = logger.getLog();
+        String record = "";
+        for (String log : fullLog) {
+            record += log + "\n";
+        }
+        logs.set(record);
+    }
+
     public void convert() {
         logger.log(convertLogMessage());
+        updateLogs();
 
         if (numberInput.get().equals("")) {
             status.set(Status.EMPTY_INPUT.toString());
             logger.log(LogMessages.EMPTY_INPUT.toString());
+            updateLogs();
         } else if (!isNumeric(numberInput.get())) {
             status.set(Status.WRONG_INPUT.toString());
             logger.log(LogMessages.WRONG_INPUT.toString());
+            updateLogs();
         } else {
             int number = Integer.parseInt(numberInput.get());
             status.set("");
             textOutput.set(NumbersToWordsConverter.toWord(number));
             logger.log(LogMessages.CONVERT_WAS_COMPLETED.toString());
+            updateLogs();
         }
     }
 }
