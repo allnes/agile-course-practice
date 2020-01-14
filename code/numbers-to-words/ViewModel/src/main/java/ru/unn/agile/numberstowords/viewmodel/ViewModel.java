@@ -31,7 +31,7 @@ public class ViewModel {
 
     public final void setLogger(final ILogger logger) {
         if (logger == null) {
-            throw new IllegalArgumentException("Logger parameter can't be null");
+            throw new IllegalArgumentException("Logger can't be null");
         }
         this.logger = logger;
     }
