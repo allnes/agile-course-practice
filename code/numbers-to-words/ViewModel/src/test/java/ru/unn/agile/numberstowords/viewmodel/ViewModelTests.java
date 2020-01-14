@@ -88,9 +88,9 @@ public class ViewModelTests {
             new ViewModel(null);
             fail("Exception wasn't thrown");
         } catch (IllegalArgumentException ex) {
-            assertEquals("Logger parameter can't be null", ex.getMessage());
+            assertEquals("Logger can't be null", ex.getMessage());
         } catch (Exception ex) {
-            fail("Invalid exception type");
+            fail("Invalid exception type when logger is null");
         }
     }
 
