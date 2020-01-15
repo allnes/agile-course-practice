@@ -107,6 +107,7 @@ public class ViewModel {
             message.append("Size: height = ").append(heightField.get())
                     .append("; width = ").append(widthField.get());
             logger.log(message.toString());
+            updateLogs();
         }
     }
 
@@ -154,6 +155,7 @@ public class ViewModel {
                     .append(" now is dead");
             logger.log(message.toString());
         }
+        updateLogs();
         gridArray = gameOfLife.getGrid().clone();
     }
 
@@ -164,6 +166,7 @@ public class ViewModel {
 
         StringBuilder message = new StringBuilder(LogMessages.NEXT_WAS_PRESSED);
         logger.log(message.toString());
+        updateLogs();
     }
 
     private void updateLogs() {
@@ -231,7 +234,7 @@ enum Status {
 
 final class LogMessages {
     public static final String CREATE_WAS_PRESSED = "Create grid. ";
-    public static final String NEXT_WAS_PRESSED = "Next turn. ";
+    public static final String NEXT_WAS_PRESSED = "Next generation. ";
     public static final String CELL_WAS_CHANGED = "Updated cell. ";
 
     private LogMessages() { }

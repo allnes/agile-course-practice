@@ -73,7 +73,7 @@ public class GameOfLife {
     @FXML
     void initialize() {
         viewModel.setLogger(new TxtLogger("./TxtLogger-gameoflife.log"));
-        
+
         txtHeight.textProperty().bindBidirectional(viewModel.heightFieldProperty());
         txtwidth.textProperty().bindBidirectional(viewModel.widthFieldProperty());
         txtStatus.textProperty().bindBidirectional(viewModel.statusTextProperty());
