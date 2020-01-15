@@ -3,11 +3,11 @@ package ru.unn.agile.gameoflife.infrastructure;
 import ru.unn.agile.gameoflife.viewmodel.ViewModel;
 import ru.unn.agile.gameoflife.viewmodel.ViewModelTest;
 
-public class ViewModelWithTxtLoggerTests extends ViewModelTest {
+public class ViewModelWithTextLoggerTests extends ViewModelTest {
     @Override
     public void setUp() {
-        TxtLogger logger =
-                new TxtLogger("./ViewModelWithTxtLoggerTests.log");
+        TextLogger logger =
+                new TextLogger("./ViewModelWithTxtLoggerTests.log");
         super.setViewModel(new ViewModel(logger));
     }
 }

@@ -13,36 +13,36 @@ import java.util.List;
 
 import static junit.framework.TestCase.assertNotNull;
 
-public class TxtLoggerTests {
-    private static final String FILENAME = "./TxtLogger_Tests-lab3.log";
-    private TxtLogger txtLogger;
+public class TextLoggerTests {
+    private static final String FILENAME = "./TxtLogger_gameoflife.log";
+    private TextLogger textLogger;
 
     @Before
     public void setUp() {
-        txtLogger = new TxtLogger(FILENAME);
+        textLogger = new TextLogger(FILENAME);
     }
 
     @Test
     public void canCreateLoggerWithFileName() {
-        assertNotNull(txtLogger);
+        assertNotNull(textLogger);
     }
 
     @Test
-    public void canCreateLogFileOnDisk() {
+    public void canCreateLogFile() {
         try {
             new BufferedReader(new FileReader(FILENAME));
         } catch (FileNotFoundException e) {
-            fail("File " + FILENAME + " wasn't found!");
+            fail("File " + FILENAME + " not found!");
         }
     }
 
     @Test
-    public void canWriteLogMessage() {
+        public void canWriteLogMessage() {
         String testMessage = "Test message";
 
-        txtLogger.log(testMessage);
+        textLogger.log(testMessage);
 
-        String message = txtLogger.getLog().get(0);
+        String message = textLogger.getLog().get(0);
         assertTrue(message.matches(".*" + testMessage + "$"));
     }
 
@@ -50,22 +50,22 @@ public class TxtLoggerTests {
     public void canWriteSeveralLogMessage() {
         String[] messages = {"Test message 1", "Test message 2"};
 
-        txtLogger.log(messages[0]);
-        txtLogger.log(messages[1]);
+        textLogger.log(messages[0]);
+        textLogger.log(messages[1]);
 
-        List<String> actualMessages = txtLogger.getLog();
+        List<String> actualMessages = textLogger.getLog();
         for (int i = 0; i < actualMessages.size(); i++) {
             assertTrue(actualMessages.get(i).matches(".*" + messages[i] + "$"));
         }
     }
 
     @Test
-    public void doesLogContainDateAndTime() {
+    public void areLogContainDateAndTime() {
         String testMessage = "Test message";
 
-        txtLogger.log(testMessage);
+        textLogger.log(testMessage);
 
-        String message = txtLogger.getLog().get(0);
+        String message = textLogger.getLog().get(0);
         assertTrue(message.matches("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} > .*"));
     }
 }

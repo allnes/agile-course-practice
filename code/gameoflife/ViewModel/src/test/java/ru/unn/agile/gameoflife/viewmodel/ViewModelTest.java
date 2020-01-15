@@ -334,13 +334,10 @@ public class ViewModelTest {
 
     @Test
     public void logContainsCellConditionForAliveCell() {
-        final int cellPositionX = 3;
-        final int cellPositionY = 2;
-
         setInputData();
         viewModel.createGrid();
 
-        viewModel.changeCellStatus(cellPositionY, cellPositionX);
+        viewModel.changeCellStatus(3, 2);
 
         String message = viewModel.getLog().get(1);
         assertTrue(message.matches(".*" + "alive" + ".*"));
@@ -348,14 +345,11 @@ public class ViewModelTest {
 
     @Test
     public void logContainsCellConditionForDeadCell() {
-        final int cellPositionX = 3;
-        final int cellPositionY = 2;
-
         setInputData();
         viewModel.createGrid();
 
-        viewModel.changeCellStatus(cellPositionY, cellPositionX);
-        viewModel.changeCellStatus(cellPositionY, cellPositionX);
+        viewModel.changeCellStatus(3, 2);
+        viewModel.changeCellStatus(3, 2);
 
         String message = viewModel.getLog().get(2);
         assertTrue(message.matches(".*" + "dead" + ".*"));

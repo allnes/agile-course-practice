@@ -19,6 +19,6 @@
       <TextField fx:id="txtHeight" layoutX="111.0" layoutY="10.0" prefHeight="25.0" prefWidth="77.0" AnchorPane.topAnchor="10.0" />
       <TextField fx:id="txtwidth" layoutX="290.0" layoutY="10.0" prefHeight="25.0" prefWidth="77.0" AnchorPane.topAnchor="10.0" />
       <GridPane fx:id="gridGame" layoutX="58.0" layoutY="232.0" prefHeight="400.0" prefWidth="373.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="195.0" AnchorPane.topAnchor="105.0" />
-      <TextArea fx:id="areaLog" editable="false" layoutX="395.0" layoutY="12.0" prefHeight="487.0" prefWidth="447.0" text="${viewModel.logs}" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="11.0" />
+      <TextArea fx:id="areaLog" editable="false" layoutX="395.0" layoutY="12.0" prefHeight="487.0" prefWidth="447.0" text="${viewModel.logsField}" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="11.0" />
    </children>
 </AnchorPane>

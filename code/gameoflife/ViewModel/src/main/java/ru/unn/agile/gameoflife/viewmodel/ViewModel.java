@@ -16,7 +16,7 @@ public class ViewModel {
     private final SimpleStringProperty statusText = new SimpleStringProperty();
     private final SimpleBooleanProperty couldNotCreate = new SimpleBooleanProperty();
     private final SimpleBooleanProperty couldNotGetNextStep = new SimpleBooleanProperty();
-    private final StringProperty logs = new SimpleStringProperty();
+    private final StringProperty logsField = new SimpleStringProperty();
 
     private ILogger logger;
 
@@ -27,7 +27,7 @@ public class ViewModel {
 
     public final void setLogger(final ILogger logger) {
         if (logger == null) {
-            throw new IllegalArgumentException("Logger parameter can't be null");
+            throw new IllegalArgumentException("Logger value can not be null");
         }
         this.logger = logger;
     }
@@ -60,12 +60,12 @@ public class ViewModel {
         }
     }
 
-    public StringProperty logsProperty() {
-        return logs;
+    public StringProperty logsFieldProperty() {
+        return logsField;
     }
 
-    public final String getLogs() {
-        return logs.get();
+    public final String getLogsField() {
+        return logsField.get();
     }
 
     public final List<String> getLog() {
@@ -171,11 +171,11 @@ public class ViewModel {
 
     private void updateLogs() {
         List<String> fullLog = logger.getLog();
-        String record = new String("");
+        String newRecord = new String("");
         for (String log : fullLog) {
-            record += log + "\n";
+            newRecord += log + "\n";
         }
-        logs.set(record);
+        logsField.set(newRecord);
     }
 
     private Status getInputStatus() {

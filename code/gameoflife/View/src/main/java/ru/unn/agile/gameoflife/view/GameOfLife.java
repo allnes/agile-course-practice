@@ -11,7 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import ru.unn.agile.gameoflife.viewmodel.ViewModel;
-import ru.unn.agile.gameoflife.infrastructure.TxtLogger;
+import ru.unn.agile.gameoflife.infrastructure.TextLogger;
 
 public class GameOfLife {
     private static final float GAME_FIELD_SIZE = 370;
@@ -72,7 +72,7 @@ public class GameOfLife {
 
     @FXML
     void initialize() {
-        viewModel.setLogger(new TxtLogger("./TxtLogger-gameoflife.log"));
+        viewModel.setLogger(new TextLogger("./TxtLogger-gameoflife.log"));
 
         txtHeight.textProperty().bindBidirectional(viewModel.heightFieldProperty());
         txtwidth.textProperty().bindBidirectional(viewModel.widthFieldProperty());
