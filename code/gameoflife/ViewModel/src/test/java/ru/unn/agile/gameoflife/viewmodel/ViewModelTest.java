@@ -319,46 +319,46 @@ public class ViewModelTest {
 
     @Test
     public void logContainsCellPositionAfterMakingNewCell() {
-        final int CellPositionX = 3;
-        final int CellPositionY = 2;
+        final int cellPositionX = 3;
+        final int cellPositionY = 2;
 
         setInputData();
         viewModel.createGrid();
 
-        viewModel.changeCellStatus(CellPositionY, CellPositionX);
+        viewModel.changeCellStatus(cellPositionY, cellPositionX);
 
         String message = viewModel.getLog().get(1);
-        assertTrue(message.matches(".*" + (char)(CellPositionY + '0')
-                        + ".*" + (char)(CellPositionX + '0') +".*"));
+        assertTrue(message.matches(".*" + (char) (cellPositionY + '0')
+                        + ".*" + (char) (cellPositionX + '0') + ".*"));
     }
 
     @Test
     public void logContainsCellConditionForAliveCell() {
-        final int CellPositionX = 3;
-        final int CellPositionY = 2;
+        final int cellPositionX = 3;
+        final int cellPositionY = 2;
 
         setInputData();
         viewModel.createGrid();
 
-        viewModel.changeCellStatus(CellPositionY, CellPositionX);
+        viewModel.changeCellStatus(cellPositionY, cellPositionX);
 
         String message = viewModel.getLog().get(1);
-        assertTrue(message.matches(".*" + "alive" +".*"));
+        assertTrue(message.matches(".*" + "alive" + ".*"));
     }
 
     @Test
     public void logContainsCellConditionForDeadCell() {
-        final int CellPositionX = 3;
-        final int CellPositionY = 2;
+        final int cellPositionX = 3;
+        final int cellPositionY = 2;
 
         setInputData();
         viewModel.createGrid();
 
-        viewModel.changeCellStatus(CellPositionY, CellPositionX);
-        viewModel.changeCellStatus(CellPositionY, CellPositionX);
+        viewModel.changeCellStatus(cellPositionY, cellPositionX);
+        viewModel.changeCellStatus(cellPositionY, cellPositionX);
 
         String message = viewModel.getLog().get(2);
-        assertTrue(message.matches(".*" + "dead" +".*"));
+        assertTrue(message.matches(".*" + "dead" + ".*"));
     }
 
     private void setInputData() {

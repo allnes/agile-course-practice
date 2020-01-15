@@ -12,7 +12,6 @@ import java.io.FileReader;
 import java.util.List;
 
 import static junit.framework.TestCase.assertNotNull;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TxtLoggerTests {
     private static final String FILENAME = "./TxtLogger_Tests-lab3.log";
