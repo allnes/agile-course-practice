@@ -38,7 +38,7 @@ public class TextLoggerTests {
 
     @Test
         public void canWriteLogMessage() {
-        String testMessage = "Test message";
+        String testMessage = "Test msg";
 
         textLogger.log(testMessage);
 
@@ -47,25 +47,25 @@ public class TextLoggerTests {
     }
 
     @Test
-    public void canWriteSeveralLogMessage() {
-        String[] messages = {"Test message 1", "Test message 2"};
+    public void canWriteSeveralLogMessages() {
+        String[] messages = {"Test msg 1", "Test msg 2"};
 
         textLogger.log(messages[0]);
         textLogger.log(messages[1]);
 
-        List<String> actualMessages = textLogger.getLog();
-        for (int i = 0; i < actualMessages.size(); i++) {
-            assertTrue(actualMessages.get(i).matches(".*" + messages[i] + "$"));
+        List<String> currentMessages = textLogger.getLog();
+        for (int i = 0; i < currentMessages.size(); i++) {
+            assertTrue(currentMessages.get(i).matches(".*" + messages[i] + "$"));
         }
     }
 
     @Test
     public void areLogContainDateAndTime() {
-        String testMessage = "Test message";
+        String testMessage = "Test msg";
 
         textLogger.log(testMessage);
 
         String message = textLogger.getLog().get(0);
-        assertTrue(message.matches("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} > .*"));
+        assertTrue(message.matches("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} >> .*"));
     }
 }

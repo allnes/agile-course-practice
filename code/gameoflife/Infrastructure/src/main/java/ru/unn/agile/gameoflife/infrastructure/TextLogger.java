@@ -38,8 +38,7 @@ public class TextLogger implements ILogger {
     @Override
     public void log(final String s) {
         try {
-            writer.write(getDateTime() + " > " + s);
-            writer.newLine();
+            writer.write(getDateTime() + " >> " + s + "\n");
             writer.flush();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -48,15 +47,16 @@ public class TextLogger implements ILogger {
 
     @Override
     public List<String> getLog() {
-        BufferedReader reader;
+
         ArrayList<String> log = new ArrayList<String>();
+        BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(filename));
-            String line = reader.readLine();
+            String logLine = reader.readLine();
 
-            while (line != null) {
-                log.add(line);
-                line = reader.readLine();
+            while (logLine != null) {
+                log.add(logLine);
+                logLine = reader.readLine();
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
