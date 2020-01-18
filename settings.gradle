@@ -251,6 +251,10 @@ project(":code/polynomial-calculator/ViewModel").name = "polynomial-calculator-v
 // Red-Black Tree
 include "code/red-black-tree/Model"
 project(":code/red-black-tree/Model").name = "red-black-tree-Model"
+include "code/red-black-tree/View"
+project(":code/red-black-tree/View").name = "red-black-tree-View"
+include "code/red-black-tree/ViewModel"
+project(":code/red-black-tree/ViewModel").name = "red-black-tree-ViewModel"
 // Попков Кирилл
 include "code/range/Model"
 project(":code/range/Model").name = "range-Model"
