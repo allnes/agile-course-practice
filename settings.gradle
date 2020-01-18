@@ -248,9 +248,9 @@ include "code/polynomial-calculator/View"
 project(":code/polynomial-calculator/View").name = "polynomial-calculator-view"
 include "code/polynomial-calculator/ViewModel"
 project(":code/polynomial-calculator/ViewModel").name = "polynomial-calculator-viewmodel"
-// Повеликин Ростислав
-include "code/red-black-tree"
-project(":code/red-black-tree").name = "red-black-tree-Model"
+// Red-Black Tree
+include "code/red-black-tree/Model"
+project(":code/red-black-tree/Model").name = "red-black-tree-Model"
 // Попков Кирилл
 include "code/range/Model"
 project(":code/range/Model").name = "range-Model"
