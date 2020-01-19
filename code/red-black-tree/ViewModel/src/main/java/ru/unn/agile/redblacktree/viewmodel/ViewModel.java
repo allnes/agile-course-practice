@@ -28,10 +28,44 @@ public class ViewModel {
     private final StringProperty resultRemove = new SimpleStringProperty();
     private final StringProperty status = new SimpleStringProperty();
 
+    public BooleanProperty addElementToTreeDisabledProperty() {
+        return addElementToTreeDisabled;
+    }
+    public final boolean isAddElementToTreeDisabled() {
+        return addElementToTreeDisabled.get();
+    }
+    public BooleanProperty findElementToTreeDisabledProperty() {
+        return findElementToTreeDisabled;
+    }
+    public final boolean isFindElementToTreeDisabled() {
+        return findElementToTreeDisabled.get();
+    }
+    public BooleanProperty removeElementToTreeDisabledProperty() {
+        return removeElementToTreeDisabled;
+    }
+    public final boolean isRemoveElementToTreeDisabled() {
+        return removeElementToTreeDisabled.get();
+    }
+
+    public StringProperty resultFindProperty() {
+        return resultFind;
+    }
+    public final String getResultFind() {
+        return resultFind.get();
+    }
+    public StringProperty resultRemoveProperty() {
+        return resultRemove;
+    }
+    public final String getResultRemove() {
+        return resultRemove.get();
+    }
+
     public ViewModel() {
         addField.set("");
         findInsertField.set("");
         removeInsertField.set("");
+        resultFind.set("");
+        resultRemove.set("");
 
         status.set(Status.WAITING.toString());
 
@@ -101,8 +135,8 @@ public class ViewModel {
 
     private Status getInputStatus() {
         Status inputStatus = Status.READY;
-        if (addField.get().isEmpty() ||
-                findInsertField.get().isEmpty() ||
+        if (addField.get().isEmpty() &&
+                findInsertField.get().isEmpty() &&
                 removeInsertField.get().isEmpty()) {
             inputStatus = Status.WAITING;
         }
@@ -134,7 +168,7 @@ public class ViewModel {
         if (findElementToTreeDisabled.get()) {
             return;
         }
-        boolean answer = rbTree.find(Integer.parseInt(addField.get()));
+        boolean answer = rbTree.find(Integer.parseInt(findInsertField.get()));
         resultFind.set(Boolean.toString(answer));
         status.set(Status.SUCCESS.toString());
     }
@@ -143,7 +177,7 @@ public class ViewModel {
         if (removeElementToTreeDisabled.get()) {
             return;
         }
-        boolean answer = rbTree.remove(Integer.parseInt(addField.get()));
+        boolean answer = rbTree.remove(Integer.parseInt(removeInsertField.get()));
         resultRemove.set(Boolean.toString(answer));
         status.set(Status.SUCCESS.toString());
     }
