@@ -1,4 +1,4 @@
-package ru.unn.agile.redblacktree;
+package ru.unn.agile.redblacktree.model;
 
 public class RedBlackTree {
     private class Node {
