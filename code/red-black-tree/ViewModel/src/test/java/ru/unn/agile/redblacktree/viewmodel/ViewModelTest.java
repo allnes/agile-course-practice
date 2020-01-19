@@ -31,4 +31,16 @@ public class ViewModelTest {
         viewModel.addElementToTree();
         assertEquals(Status.WAITING.toString(), viewModel.statusProperty().get());
     }
+
+    @Test
+    public void statusIsWaitingWhenFindElementToTreeWithEmptyFields() {
+        viewModel.findElementToTree();
+        assertEquals(Status.WAITING.toString(), viewModel.statusProperty().get());
+    }
+
+    @Test
+    public void statusIsWaitingWhenRemoveElementToTreeWithEmptyFields() {
+        viewModel.removeElementToTree();
+        assertEquals(Status.WAITING.toString(), viewModel.statusProperty().get());
+    }
 }

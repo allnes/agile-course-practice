@@ -15,35 +15,29 @@ import java.util.List;
 
 public class ViewModel {
     private final StringProperty addField = new SimpleStringProperty();
-    private final StringProperty isEmptyField = new SimpleStringProperty();
-    private final StringProperty getSizeField = new SimpleStringProperty();
-    private final StringProperty minimumField = new SimpleStringProperty();
     private final StringProperty findInsertField = new SimpleStringProperty();
-    private final StringProperty findResultField = new SimpleStringProperty();
     private final StringProperty removeInsertField = new SimpleStringProperty();
-    private final StringProperty removeResultField = new SimpleStringProperty();
     private RedBlackTree rbTree = new RedBlackTree();
 
     private final BooleanProperty addElementToTreeDisabled = new SimpleBooleanProperty();
+    private final BooleanProperty findElementToTreeDisabled = new SimpleBooleanProperty();
+    private final BooleanProperty removeElementToTreeDisabled = new SimpleBooleanProperty();
 
     private final List<ValueChangeListener> valueChangedListeners = new ArrayList<>();
+    private final StringProperty resultFind = new SimpleStringProperty();
+    private final StringProperty resultRemove = new SimpleStringProperty();
     private final StringProperty status = new SimpleStringProperty();
 
     public ViewModel() {
         addField.set("");
-        isEmptyField.set("");
-        getSizeField.set("");
-        minimumField.set("");
         findInsertField.set("");
-        findResultField.set("");
         removeInsertField.set("");
-        removeResultField.set("");
 
         status.set(Status.WAITING.toString());
 
         BooleanBinding couldAddElementToTree = new BooleanBinding() {
             {
-                super.bind(addField, findInsertField, removeInsertField);
+                super.bind(addField);
             }
             @Override
             protected boolean computeValue() {
@@ -51,6 +45,28 @@ public class ViewModel {
             }
         };
         addElementToTreeDisabled.bind(couldAddElementToTree.not());
+
+        BooleanBinding couldFindElementToTree = new BooleanBinding() {
+            {
+                super.bind(findInsertField);
+            }
+            @Override
+            protected boolean computeValue() {
+                return getInputStatus() == Status.READY;
+            }
+        };
+        findElementToTreeDisabled.bind(couldFindElementToTree.not());
+
+        BooleanBinding couldRemoveElementToTree = new BooleanBinding() {
+            {
+                super.bind(removeInsertField);
+            }
+            @Override
+            protected boolean computeValue() {
+                return getInputStatus() == Status.READY;
+            }
+        };
+        removeElementToTreeDisabled.bind(couldRemoveElementToTree.not());
 
         // Add listeners to the input text fields
         final List<StringProperty> fields = new ArrayList<StringProperty>() { {
@@ -69,26 +85,11 @@ public class ViewModel {
     public StringProperty addFieldProperty() {
         return addField;
     }
-    public StringProperty isEmptyFieldProperty() {
-        return isEmptyField;
-    }
-    public StringProperty getSizeFieldProperty() {
-        return getSizeField;
-    }
-    public StringProperty minimumFieldProperty() {
-        return minimumField;
-    }
     public StringProperty findInsertFieldProperty() {
         return findInsertField;
     }
-    public StringProperty findResultFieldProperty() {
-        return findResultField;
-    }
     public StringProperty removeInsertFieldProperty() {
         return removeInsertField;
-    }
-    public StringProperty removeResultFieldProperty() {
-        return removeResultField;
     }
 
     public StringProperty statusProperty() {
@@ -126,6 +127,24 @@ public class ViewModel {
             return;
         }
         rbTree.insert(Integer.parseInt(addField.get()));
+        status.set(Status.SUCCESS.toString());
+    }
+
+    public void findElementToTree() {
+        if (findElementToTreeDisabled.get()) {
+            return;
+        }
+        boolean answer = rbTree.find(Integer.parseInt(addField.get()));
+        resultFind.set(Boolean.toString(answer));
+        status.set(Status.SUCCESS.toString());
+    }
+
+    public void removeElementToTree() {
+        if (removeElementToTreeDisabled.get()) {
+            return;
+        }
+        boolean answer = rbTree.remove(Integer.parseInt(addField.get()));
+        resultRemove.set(Boolean.toString(answer));
         status.set(Status.SUCCESS.toString());
     }
 
