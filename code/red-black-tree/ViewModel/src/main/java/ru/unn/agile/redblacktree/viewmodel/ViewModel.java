@@ -20,8 +20,8 @@ public class ViewModel {
     private RedBlackTree rbTree = new RedBlackTree();
 
     private final BooleanProperty addElementToTreeDisabled = new SimpleBooleanProperty();
-    private final BooleanProperty findElementToTreeDisabled = new SimpleBooleanProperty();
-    private final BooleanProperty removeElementToTreeDisabled = new SimpleBooleanProperty();
+    private final BooleanProperty findElementInTreeDisabled = new SimpleBooleanProperty();
+    private final BooleanProperty removeElementFromTreeDisabled = new SimpleBooleanProperty();
 
     private final List<ValueChangeListener> valueChangedListeners = new ArrayList<>();
     private final StringProperty resultFind = new SimpleStringProperty();
@@ -31,33 +31,18 @@ public class ViewModel {
     public BooleanProperty addElementToTreeDisabledProperty() {
         return addElementToTreeDisabled;
     }
-    public final boolean isAddElementToTreeDisabled() {
-        return addElementToTreeDisabled.get();
+    public BooleanProperty findElementInTreeDisabledProperty() {
+        return findElementInTreeDisabled;
     }
-    public BooleanProperty findElementToTreeDisabledProperty() {
-        return findElementToTreeDisabled;
-    }
-    public final boolean isFindElementToTreeDisabled() {
-        return findElementToTreeDisabled.get();
-    }
-    public BooleanProperty removeElementToTreeDisabledProperty() {
-        return removeElementToTreeDisabled;
-    }
-    public final boolean isRemoveElementToTreeDisabled() {
-        return removeElementToTreeDisabled.get();
+    public BooleanProperty removeElementFromTreeDisabledProperty() {
+        return removeElementFromTreeDisabled;
     }
 
     public StringProperty resultFindProperty() {
         return resultFind;
     }
-    public final String getResultFind() {
-        return resultFind.get();
-    }
     public StringProperty resultRemoveProperty() {
         return resultRemove;
-    }
-    public final String getResultRemove() {
-        return resultRemove.get();
     }
 
     public ViewModel() {
@@ -80,7 +65,7 @@ public class ViewModel {
         };
         addElementToTreeDisabled.bind(couldAddElementToTree.not());
 
-        BooleanBinding couldFindElementToTree = new BooleanBinding() {
+        BooleanBinding couldFindElementInTree = new BooleanBinding() {
             {
                 super.bind(findInsertField);
             }
@@ -89,9 +74,9 @@ public class ViewModel {
                 return getInputsStatus() == Status.READY;
             }
         };
-        findElementToTreeDisabled.bind(couldFindElementToTree.not());
+        findElementInTreeDisabled.bind(couldFindElementInTree.not());
 
-        BooleanBinding couldRemoveElementToTree = new BooleanBinding() {
+        BooleanBinding couldRemoveElementFromTree = new BooleanBinding() {
             {
                 super.bind(removeInsertField);
             }
@@ -100,9 +85,8 @@ public class ViewModel {
                 return getInputsStatus() == Status.READY;
             }
         };
-        removeElementToTreeDisabled.bind(couldRemoveElementToTree.not());
+        removeElementFromTreeDisabled.bind(couldRemoveElementFromTree.not());
 
-        // Add listeners to the input text fields
         final List<StringProperty> fields = new ArrayList<StringProperty>() { {
             add(addField);
             add(findInsertField);
@@ -162,7 +146,7 @@ public class ViewModel {
     }
 
     public void findElementInTree() {
-        if (findElementToTreeDisabled.get()) {
+        if (findElementInTreeDisabled.get()) {
             return;
         }
         boolean answer = rbTree.find(Integer.parseInt(findInsertField.get()));
@@ -171,7 +155,7 @@ public class ViewModel {
     }
 
     public void removeElementFromTree() {
-        if (removeElementToTreeDisabled.get()) {
+        if (removeElementFromTreeDisabled.get()) {
             return;
         }
         boolean answer = rbTree.remove(Integer.parseInt(removeInsertField.get()));

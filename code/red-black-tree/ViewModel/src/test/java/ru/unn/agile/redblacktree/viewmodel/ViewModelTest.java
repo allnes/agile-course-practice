@@ -81,12 +81,12 @@ public class ViewModelTest {
 
     @Test
     public void buttonIsDisabledInitiallyForFindElement() {
-        assertTrue(viewModel.findElementToTreeDisabledProperty().get());
+        assertTrue(viewModel.findElementInTreeDisabledProperty().get());
     }
 
     @Test
     public void buttonIsDisabledInitiallyForRemoveElement() {
-        assertTrue(viewModel.removeElementToTreeDisabledProperty().get());
+        assertTrue(viewModel.removeElementFromTreeDisabledProperty().get());
     }
 
     @Test
@@ -102,7 +102,7 @@ public class ViewModelTest {
         setInputData();
         viewModel.findInsertFieldProperty().set("trash");
 
-        assertTrue(viewModel.findElementToTreeDisabledProperty().get());
+        assertTrue(viewModel.findElementInTreeDisabledProperty().get());
     }
 
     @Test
@@ -110,7 +110,7 @@ public class ViewModelTest {
         setInputData();
         viewModel.removeInsertFieldProperty().set("trash");
 
-        assertTrue(viewModel.removeElementToTreeDisabledProperty().get());
+        assertTrue(viewModel.removeElementFromTreeDisabledProperty().get());
     }
 
     @Test
