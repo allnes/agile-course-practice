@@ -9,73 +9,73 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class ViewModelTests {
-    private ViewModel viewModel;
+    private ViewModel viewModelForm;
 
-    protected void setViewModel(final ViewModel viewModel) {
-        this.viewModel = viewModel;
+    protected void setViewModelForm(final ViewModel viewModelForm) {
+        this.viewModelForm = viewModelForm;
     }
 
     @Before
     public void setUp() {
         FakeLogger logger = new FakeLogger();
-        viewModel = new ViewModel(logger);
+        viewModelForm = new ViewModel(logger);
     }
 
     @After
     public void tearDown() {
-        viewModel = null;
+        viewModelForm = null;
     }
 
     @Test
     public void canSetDefaultValues() {
-        assertEquals("", viewModel.numberInputProperty().get());
-        assertEquals("", viewModel.textOutputProperty().get());
-        assertEquals("", viewModel.statusProperty().get());
+        assertEquals("", viewModelForm.numberInputProperty().get());
+        assertEquals("", viewModelForm.textOutputProperty().get());
+        assertEquals("", viewModelForm.statusProperty().get());
     }
 
     @Test
     public void setErrorMessageWithEmptyInput() {
-        viewModel.convert();
+        viewModelForm.convert();
 
-        assertEquals(Status.EMPTY_INPUT.toString(), viewModel.statusProperty().get());
+        assertEquals(Status.EMPTY_INPUT.toString(), viewModelForm.statusProperty().get());
     }
 
     @Test
     public void setErrorMessageWithIncorrectInput() {
-        viewModel.numberInputProperty().set("qwe");
+        viewModelForm.numberInputProperty().set("qwe");
 
-        viewModel.convert();
+        viewModelForm.convert();
 
-        assertEquals(Status.WRONG_INPUT.toString(), viewModel.statusProperty().get());
+        assertEquals(Status.WRONG_INPUT.toString(), viewModelForm.statusProperty().get());
     }
 
     @Test
     public void convertingHasCorrectResult() {
-        viewModel.numberInputProperty().set("15");
+        viewModelForm.numberInputProperty().set("15");
 
-        viewModel.convert();
+        viewModelForm.convert();
 
-        assertEquals("fifteen", viewModel.textOutputProperty().get());
+        assertEquals("fifteen", viewModelForm.textOutputProperty().get());
     }
 
     @Test
     public void setErrorMessageWithNotInteger() {
-        viewModel.numberInputProperty().set("15.5");
+        viewModelForm.numberInputProperty().set("15.5");
 
-        viewModel.convert();
+        viewModelForm.convert();
 
-        assertEquals(Status.WRONG_INPUT.toString(), viewModel.statusProperty().get());
+        assertEquals(Status.WRONG_INPUT.toString(), viewModelForm.statusProperty().get());
     }
 
     @Test
     public void clearErrorMessageWithCorrectInput() {
-        viewModel.numberInputProperty().set("wrong");
-        viewModel.convert();
+        viewModelForm.numberInputProperty().set("wrong");
+        viewModelForm.convert();
 
-        viewModel.numberInputProperty().set("1");
-        viewModel.convert();
+        viewModelForm.numberInputProperty().set("1");
+        viewModelForm.convert();
 
-        assertEquals("", viewModel.statusProperty().get());
+        assertEquals("", viewModelForm.statusProperty().get());
     }
 
     @Test
@@ -100,23 +100,23 @@ public class ViewModelTests {
 
     @Test
     public void logIsEmptyInTheBeginning() {
-        List<String> log = viewModel.getLog();
+        List<String> log = viewModelForm.getLog();
 
         assertEquals(0, log.size());
     }
 
     @Test
     public void convertingIsLogged() {
-        viewModel.convert();
-        List<String> log = viewModel.getLog();
+        viewModelForm.convert();
+        List<String> log = viewModelForm.getLog();
 
         assertNotEquals(0, log.size());
     }
 
     @Test
     public void logContainsPressInformation() {
-        viewModel.convert();
-        String message = viewModel.getLog().get(0);
+        viewModelForm.convert();
+        String message = viewModelForm.getLog().get(0);
 
         assertTrue(message.matches(".*"
                 + LogMessages.CONVERT_WAS_PRESSED.toString() + ".*"));
@@ -124,27 +124,27 @@ public class ViewModelTests {
 
     @Test
     public void logContainsInputInformation() {
-        viewModel.numberInputProperty().set("42");
-        viewModel.convert();
-        String message = viewModel.getLog().get(0);
+        viewModelForm.numberInputProperty().set("42");
+        viewModelForm.convert();
+        String message = viewModelForm.getLog().get(0);
 
         assertTrue(message.matches(".*" + "Input: \"42\"." + ".*"));
     }
 
     @Test
     public void canPutSeveralMessages() {
-        viewModel.convert();
-        viewModel.convert();
-        viewModel.convert();
-        List<String> log = viewModel.getLog();
+        viewModelForm.convert();
+        viewModelForm.convert();
+        viewModelForm.convert();
+        List<String> log = viewModelForm.getLog();
 
         assertEquals(6, log.size());
     }
 
     @Test
     public void logContainsConvertingEmptyInputInformation() {
-        viewModel.convert();
-        String message = viewModel.getLog().get(viewModel.getLog().size() - 1);
+        viewModelForm.convert();
+        String message = viewModelForm.getLog().get(viewModelForm.getLog().size() - 1);
 
         assertTrue(message.matches(".*"
                 + LogMessages.EMPTY_INPUT.toString() + ".*"));
@@ -152,9 +152,9 @@ public class ViewModelTests {
 
     @Test
     public void logContainsConvertingWrongInputInformation() {
-        viewModel.numberInputProperty().set("wrong");
-        viewModel.convert();
-        String message = viewModel.getLog().get(viewModel.getLog().size() - 1);
+        viewModelForm.numberInputProperty().set("wrong");
+        viewModelForm.convert();
+        String message = viewModelForm.getLog().get(viewModelForm.getLog().size() - 1);
 
         assertTrue(message.matches(".*"
                 + LogMessages.WRONG_INPUT.toString() + ".*"));
@@ -162,9 +162,9 @@ public class ViewModelTests {
 
     @Test
     public void logContainsConvertingCorrectInputInformation() {
-        viewModel.numberInputProperty().set("42");
-        viewModel.convert();
-        String message = viewModel.getLog().get(viewModel.getLog().size() - 1);
+        viewModelForm.numberInputProperty().set("42");
+        viewModelForm.convert();
+        String message = viewModelForm.getLog().get(viewModelForm.getLog().size() - 1);
 
         assertTrue(message.matches(".*"
                 + LogMessages.CONVERT_WAS_COMPLETED.toString() + ".*"));
