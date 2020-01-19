@@ -6,49 +6,49 @@ import javafx.beans.property.StringProperty;
 import ru.unn.agile.redblacktree.model.RedBlackTree;
 
 public class ViewModel {
-    private final StringProperty add_field = new SimpleStringProperty();
-    private final StringProperty is_empty_field = new SimpleStringProperty();
-    private final StringProperty get_size_field = new SimpleStringProperty();
-    private final StringProperty minimum_field = new SimpleStringProperty();
-    private final StringProperty find_insert_field = new SimpleStringProperty();
-    private final StringProperty find_result_field = new SimpleStringProperty();
-    private final StringProperty remove_insert_field = new SimpleStringProperty();
-    private final StringProperty remove_result_field = new SimpleStringProperty();
+    private final StringProperty addField = new SimpleStringProperty();
+    private final StringProperty isEmptyField = new SimpleStringProperty();
+    private final StringProperty getSizeField = new SimpleStringProperty();
+    private final StringProperty minimumField = new SimpleStringProperty();
+    private final StringProperty findInsertField = new SimpleStringProperty();
+    private final StringProperty findResultField = new SimpleStringProperty();
+    private final StringProperty removeInsertField = new SimpleStringProperty();
+    private final StringProperty removeResultField = new SimpleStringProperty();
     private RedBlackTree rb_tree = new RedBlackTree();
 
     public ViewModel() {
-        add_field.set("");
-        is_empty_field.set("");
-        get_size_field.set("");
-        minimum_field.set("");
-        find_insert_field.set("");
-        find_result_field.set("");
-        remove_insert_field.set("");
-        remove_result_field.set("");
+        addField.set("");
+        isEmptyField.set("");
+        getSizeField.set("");
+        minimumField.set("");
+        findInsertField.set("");
+        findResultField.set("");
+        removeInsertField.set("");
+        removeResultField.set("");
     }
 
     public StringProperty addFieldProperty() {
-        return add_field;
+        return addField;
     }
     public StringProperty isEmptyFieldProperty() {
-        return is_empty_field;
+        return isEmptyField;
     }
     public StringProperty getSizeFieldProperty() {
-        return get_size_field;
+        return getSizeField;
     }
     public StringProperty minimumFieldProperty() {
-        return minimum_field;
+        return minimumField;
     }
     public StringProperty findInsertFieldProperty() {
-        return find_insert_field;
+        return findInsertField;
     }
     public StringProperty findResultFieldProperty() {
-        return find_result_field;
+        return findResultField;
     }
     public StringProperty removeInsertFieldProperty() {
-        return remove_insert_field;
+        return removeInsertField;
     }
     public StringProperty removeResultFieldProperty() {
-        return remove_result_field;
+        return removeResultField;
     }
 }
