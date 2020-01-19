@@ -36,7 +36,6 @@ public class RedBlackTreeView {
         txtAddField.textProperty().bindBidirectional(viewModel.addFieldProperty());
         txtFindField.textProperty().bindBidirectional(viewModel.findInsertFieldProperty());
         txtRemoveField.textProperty().bindBidirectional(viewModel.removeInsertFieldProperty());
-        txtAddField.textProperty().bindBidirectional(viewModel.addFieldProperty());
 
         txtResultFind.textProperty().bindBidirectional(viewModel.resultFindProperty());
         txtResultRemove.textProperty().bindBidirectional(viewModel.resultRemoveProperty());
@@ -51,14 +50,14 @@ public class RedBlackTreeView {
         btnFind.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent event) {
-                viewModel.findElementToTree();
+                viewModel.findElementInTree();
             }
         });
 
         btnRemove.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent event) {
-                viewModel.removeElementToTree();
+                viewModel.removeElementFromTree();
             }
         });
     }

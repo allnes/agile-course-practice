@@ -29,68 +29,68 @@ public class ViewModelTest {
     @Test
     public void statusIsWaitingWhenAddElementToTreeWithEmptyFields() {
         viewModel.addElementToTree();
-        assertEquals(Status.WAITING.toString(), viewModel.statusProperty().get());
+        assertEquals(Status.WAITING.toString(), viewModel.getStatus());
     }
 
     @Test
     public void statusIsWaitingWhenFindElementToTreeWithEmptyFields() {
-        viewModel.findElementToTree();
-        assertEquals(Status.WAITING.toString(), viewModel.statusProperty().get());
+        viewModel.findElementInTree();
+        assertEquals(Status.WAITING.toString(), viewModel.getStatus());
     }
 
     @Test
     public void statusIsWaitingWhenRemoveElementToTreeWithEmptyFields() {
-        viewModel.removeElementToTree();
-        assertEquals(Status.WAITING.toString(), viewModel.statusProperty().get());
+        viewModel.removeElementFromTree();
+        assertEquals(Status.WAITING.toString(), viewModel.getStatus());
     }
 
     @Test
-    public void statusIsReadyWhenFieldsAreFill() {
+    public void statusIsReadyWhenAllFieldsAreFill() {
         viewModel.addFieldProperty().set("1");
         viewModel.findInsertFieldProperty().set("2");
         viewModel.removeInsertFieldProperty().set("3");
 
-        assertEquals(Status.READY.toString(), viewModel.statusProperty().get());
+        assertEquals(Status.READY.toString(), viewModel.getStatus());
     }
 
     @Test
     public void canReportBadFormatAddField() {
         viewModel.addFieldProperty().set("a");
 
-        assertEquals(Status.BAD_FORMAT.toString(), viewModel.statusProperty().get());
+        assertEquals(Status.BAD_FORMAT.toString(), viewModel.getStatus());
     }
 
     @Test
     public void canReportBadFormatFindInsertField() {
         viewModel.findInsertFieldProperty().set("b");
 
-        assertEquals(Status.BAD_FORMAT.toString(), viewModel.statusProperty().get());
+        assertEquals(Status.BAD_FORMAT.toString(), viewModel.getStatus());
     }
 
     @Test
     public void canReportBadFormatRemoveInsertField() {
         viewModel.removeInsertFieldProperty().set("c");
 
-        assertEquals(Status.BAD_FORMAT.toString(), viewModel.statusProperty().get());
+        assertEquals(Status.BAD_FORMAT.toString(), viewModel.getStatus());
     }
 
     @Test
-    public void calculateButtonIsDisabledInitiallyForAddElement() {
+    public void buttonIsDisabledInitiallyForAddElement() {
         assertTrue(viewModel.addElementToTreeDisabledProperty().get());
     }
 
     @Test
-    public void calculateButtonIsDisabledInitiallyForFindElement() {
+    public void buttonIsDisabledInitiallyForFindElement() {
         assertTrue(viewModel.findElementToTreeDisabledProperty().get());
     }
 
     @Test
-    public void calculateButtonIsDisabledInitiallyForRemoveElement() {
+    public void buttonIsDisabledInitiallyForRemoveElement() {
         assertTrue(viewModel.removeElementToTreeDisabledProperty().get());
     }
 
     @Test
-    public void calculateButtonIsDisabledWhenFormatIsBadForAddElement() {
+    public void buttonIsDisabledWhenFormatIsBadForAddElement() {
         setInputData();
         viewModel.addFieldProperty().set("trash");
 
@@ -98,7 +98,7 @@ public class ViewModelTest {
     }
 
     @Test
-    public void calculateButtonIsDisabledWhenFormatIsBadForFindElement() {
+    public void buttonIsDisabledWhenFormatIsBadForFindElement() {
         setInputData();
         viewModel.findInsertFieldProperty().set("trash");
 
@@ -106,7 +106,7 @@ public class ViewModelTest {
     }
 
     @Test
-    public void calculateButtonIsDisabledWhenFormatIsBadForRemoveElement() {
+    public void buttonIsDisabledWhenFormatIsBadForRemoveElement() {
         setInputData();
         viewModel.removeInsertFieldProperty().set("trash");
 
@@ -119,7 +119,7 @@ public class ViewModelTest {
         viewModel.addElementToTree();
 
         viewModel.findInsertFieldProperty().set("1");
-        viewModel.findElementToTree();
+        viewModel.findElementInTree();
 
         assertTrue(Boolean.parseBoolean(viewModel.resultFindProperty().get()));
     }
@@ -127,7 +127,7 @@ public class ViewModelTest {
     @Test
     public void operationFindHasCorrectResult() {
         viewModel.findInsertFieldProperty().set("1");
-        viewModel.findElementToTree();
+        viewModel.findElementInTree();
 
         assertFalse(Boolean.parseBoolean(viewModel.resultFindProperty().get()));
     }
@@ -138,7 +138,7 @@ public class ViewModelTest {
         viewModel.addElementToTree();
 
         viewModel.removeInsertFieldProperty().set("1");
-        viewModel.removeElementToTree();
+        viewModel.removeElementFromTree();
 
         assertTrue(Boolean.parseBoolean(viewModel.resultRemoveProperty().get()));
     }
@@ -147,48 +147,48 @@ public class ViewModelTest {
     public void canSetSuccessMessageForAddElement() {
         setInputData();
         viewModel.addElementToTree();
-        assertEquals(Status.SUCCESS.toString(), viewModel.statusProperty().get());
+        assertEquals(Status.SUCCESS.toString(), viewModel.getStatus());
     }
 
     @Test
     public void canSetSuccessMessageForFindElement() {
         setInputData();
-        viewModel.findElementToTree();
-        assertEquals(Status.SUCCESS.toString(), viewModel.statusProperty().get());
+        viewModel.findElementInTree();
+        assertEquals(Status.SUCCESS.toString(), viewModel.getStatus());
     }
 
     @Test
     public void canSetSuccessMessageForRemoveElement() {
         setInputData();
-        viewModel.removeElementToTree();
-        assertEquals(Status.SUCCESS.toString(), viewModel.statusProperty().get());
+        viewModel.removeElementFromTree();
+        assertEquals(Status.SUCCESS.toString(), viewModel.getStatus());
     }
 
     @Test
     public void canSetBadFormatMessageForAddElement() {
         viewModel.addFieldProperty().set("#sdiofhsdkjf");
         viewModel.addElementToTree();
-        assertEquals(Status.BAD_FORMAT.toString(), viewModel.statusProperty().get());
+        assertEquals(Status.BAD_FORMAT.toString(), viewModel.getStatus());
     }
 
     @Test
     public void canSetBadFormatMessageForFindElement() {
         viewModel.findInsertFieldProperty().set("#sdiofhsdkjf");
-        viewModel.findElementToTree();
-        assertEquals(Status.BAD_FORMAT.toString(), viewModel.statusProperty().get());
+        viewModel.findElementInTree();
+        assertEquals(Status.BAD_FORMAT.toString(), viewModel.getStatus());
     }
 
     @Test
     public void canSetBadFormatMessageForRemoveElement() {
         viewModel.removeInsertFieldProperty().set("#sdiofhsdkjf");
-        viewModel.removeElementToTree();
-        assertEquals(Status.BAD_FORMAT.toString(), viewModel.statusProperty().get());
+        viewModel.removeElementFromTree();
+        assertEquals(Status.BAD_FORMAT.toString(), viewModel.getStatus());
     }
 
     @Test
     public void statusIsReadyWhenSetProperDataForAllInserts() {
         setInputData();
-        assertEquals(Status.READY.toString(), viewModel.statusProperty().get());
+        assertEquals(Status.READY.toString(), viewModel.getStatus());
     }
 
     private void setInputData() {

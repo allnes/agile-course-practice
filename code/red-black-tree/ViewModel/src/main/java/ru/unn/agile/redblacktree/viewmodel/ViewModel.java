@@ -75,7 +75,7 @@ public class ViewModel {
             }
             @Override
             protected boolean computeValue() {
-                return getInputStatus() == Status.READY;
+                return getInputsStatus() == Status.READY;
             }
         };
         addElementToTreeDisabled.bind(couldAddElementToTree.not());
@@ -86,7 +86,7 @@ public class ViewModel {
             }
             @Override
             protected boolean computeValue() {
-                return getInputStatus() == Status.READY;
+                return getInputsStatus() == Status.READY;
             }
         };
         findElementToTreeDisabled.bind(couldFindElementToTree.not());
@@ -97,7 +97,7 @@ public class ViewModel {
             }
             @Override
             protected boolean computeValue() {
-                return getInputStatus() == Status.READY;
+                return getInputsStatus() == Status.READY;
             }
         };
         removeElementToTreeDisabled.bind(couldRemoveElementToTree.not());
@@ -126,14 +126,11 @@ public class ViewModel {
         return removeInsertField;
     }
 
-    public StringProperty statusProperty() {
-        return status;
-    }
     public final String getStatus() {
         return status.get();
     }
 
-    private Status getInputStatus() {
+    private Status getInputsStatus() {
         Status inputStatus = Status.READY;
         if (addField.get().isEmpty()
                 && findInsertField.get().isEmpty()
@@ -164,7 +161,7 @@ public class ViewModel {
         status.set(Status.SUCCESS.toString());
     }
 
-    public void findElementToTree() {
+    public void findElementInTree() {
         if (findElementToTreeDisabled.get()) {
             return;
         }
@@ -173,7 +170,7 @@ public class ViewModel {
         status.set(Status.SUCCESS.toString());
     }
 
-    public void removeElementToTree() {
+    public void removeElementFromTree() {
         if (removeElementToTreeDisabled.get()) {
             return;
         }
@@ -186,7 +183,7 @@ public class ViewModel {
         @Override
         public void changed(final ObservableValue<? extends String> observable,
                             final String oldValue, final String newValue) {
-            status.set(getInputStatus().toString());
+            status.set(getInputsStatus().toString());
         }
     }
 }
