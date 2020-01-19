@@ -113,12 +113,6 @@ public class ViewModelTest {
         assertTrue(viewModel.removeElementToTreeDisabledProperty().get());
     }
 
-    private void setInputData() {
-        viewModel.addFieldProperty().set("1");
-        viewModel.findInsertFieldProperty().set("1");
-        viewModel.removeInsertFieldProperty().set("1");
-    }
-
     @Test
     public void operationAddHasCorrectResult() {
         viewModel.addFieldProperty().set("1");
@@ -147,5 +141,59 @@ public class ViewModelTest {
         viewModel.removeElementToTree();
 
         assertTrue(Boolean.parseBoolean(viewModel.resultRemoveProperty().get()));
+    }
+
+    @Test
+    public void canSetSuccessMessageForAddElement() {
+        setInputData();
+        viewModel.addElementToTree();
+        assertEquals(Status.SUCCESS.toString(), viewModel.statusProperty().get());
+    }
+
+    @Test
+    public void canSetSuccessMessageForFindElement() {
+        setInputData();
+        viewModel.findElementToTree();
+        assertEquals(Status.SUCCESS.toString(), viewModel.statusProperty().get());
+    }
+
+    @Test
+    public void canSetSuccessMessageForRemoveElement() {
+        setInputData();
+        viewModel.removeElementToTree();
+        assertEquals(Status.SUCCESS.toString(), viewModel.statusProperty().get());
+    }
+
+    @Test
+    public void canSetBadFormatMessageForAddElement() {
+        viewModel.addFieldProperty().set("#selfie");
+        viewModel.addElementToTree();
+        assertEquals(Status.BAD_FORMAT.toString(), viewModel.statusProperty().get());
+    }
+
+    @Test
+    public void canSetBadFormatMessageForFindElement() {
+        viewModel.findInsertFieldProperty().set("#selfie");
+        viewModel.findElementToTree();
+        assertEquals(Status.BAD_FORMAT.toString(), viewModel.statusProperty().get());
+    }
+
+    @Test
+    public void canSetBadFormatMessageForRemoveElement() {
+        viewModel.removeInsertFieldProperty().set("#selfie");
+        viewModel.removeElementToTree();
+        assertEquals(Status.BAD_FORMAT.toString(), viewModel.statusProperty().get());
+    }
+
+    @Test
+    public void statusIsReadyWhenSetProperData() {
+        setInputData();
+        assertEquals(Status.READY.toString(), viewModel.statusProperty().get());
+    }
+
+    private void setInputData() {
+        viewModel.addFieldProperty().set("1");
+        viewModel.findInsertFieldProperty().set("1");
+        viewModel.removeInsertFieldProperty().set("1");
     }
 }
