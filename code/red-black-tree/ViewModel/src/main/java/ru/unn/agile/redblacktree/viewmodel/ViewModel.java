@@ -135,9 +135,9 @@ public class ViewModel {
 
     private Status getInputStatus() {
         Status inputStatus = Status.READY;
-        if (addField.get().isEmpty() &&
-                findInsertField.get().isEmpty() &&
-                removeInsertField.get().isEmpty()) {
+        if (addField.get().isEmpty()
+                && findInsertField.get().isEmpty()
+                && removeInsertField.get().isEmpty()) {
             inputStatus = Status.WAITING;
         }
         try {

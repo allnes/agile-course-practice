@@ -166,27 +166,27 @@ public class ViewModelTest {
 
     @Test
     public void canSetBadFormatMessageForAddElement() {
-        viewModel.addFieldProperty().set("#selfie");
+        viewModel.addFieldProperty().set("#sdiofhsdkjf");
         viewModel.addElementToTree();
         assertEquals(Status.BAD_FORMAT.toString(), viewModel.statusProperty().get());
     }
 
     @Test
     public void canSetBadFormatMessageForFindElement() {
-        viewModel.findInsertFieldProperty().set("#selfie");
+        viewModel.findInsertFieldProperty().set("#sdiofhsdkjf");
         viewModel.findElementToTree();
         assertEquals(Status.BAD_FORMAT.toString(), viewModel.statusProperty().get());
     }
 
     @Test
     public void canSetBadFormatMessageForRemoveElement() {
-        viewModel.removeInsertFieldProperty().set("#selfie");
+        viewModel.removeInsertFieldProperty().set("#sdiofhsdkjf");
         viewModel.removeElementToTree();
         assertEquals(Status.BAD_FORMAT.toString(), viewModel.statusProperty().get());
     }
 
     @Test
-    public void statusIsReadyWhenSetProperData() {
+    public void statusIsReadyWhenSetProperDataForAllInserts() {
         setInputData();
         assertEquals(Status.READY.toString(), viewModel.statusProperty().get());
     }
