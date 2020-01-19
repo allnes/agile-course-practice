@@ -14,7 +14,7 @@ public class ViewModel {
     private final StringProperty findResultField = new SimpleStringProperty();
     private final StringProperty removeInsertField = new SimpleStringProperty();
     private final StringProperty removeResultField = new SimpleStringProperty();
-    private RedBlackTree rb_tree = new RedBlackTree();
+    private RedBlackTree rbTree = new RedBlackTree();
 
     public ViewModel() {
         addField.set("");
