@@ -64,6 +64,6 @@ public class BinaryTreeTxtLoggerTests {
         txtLogger.logOfBinaryTreeStructure(testMessage);
 
         String message = txtLogger.getLogOfBinaryTreeStructure().get(0);
-        assertThat(message, matchesPattern("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} > .*"));
+        assertThat(message, matchesPattern("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} --> .*"));
     }
 }
