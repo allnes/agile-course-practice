@@ -9,8 +9,8 @@ import static org.junit.Assert.*;
 public class ViewModelTests {
     private ViewModel viewModel;
 
-    public void setExternalViewModel(final ViewModel viewModel) {
-        this.viewModel = viewModel;
+    public void setExternalViewModelForStructure(final ViewModel viewModelForm) {
+        this.viewModel = viewModelForm;
     }
 
     @Before

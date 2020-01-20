@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.Locale;
 
 public class BinaryTreeTxtLogger implements ILogger {
-    private static final String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
+    private static final String CURRENT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private final BufferedWriter writer;
     private final String filename;
 
     private static String now() {
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW, Locale.ENGLISH);
+        SimpleDateFormat sdf = new SimpleDateFormat(CURRENT_DATE_FORMAT, Locale.ENGLISH);
         return sdf.format(cal.getTime());
     }
 
@@ -35,9 +35,9 @@ public class BinaryTreeTxtLogger implements ILogger {
         writer = logWriter;
     }
 
-    public void logOfBinaryTreeStructure(final String s) {
+    public void logOfBinaryTreeStructure(final String str) {
         try {
-            writer.write(now() + " > " + s);
+            writer.write(now() + " --> " + str);
             writer.newLine();
             writer.flush();
         } catch (Exception e) {
@@ -46,15 +46,15 @@ public class BinaryTreeTxtLogger implements ILogger {
     }
 
     public List<String> getLogOfBinaryTreeStructure() {
-        BufferedReader reader;
+        BufferedReader bufferedReader;
         ArrayList<String> log = new ArrayList<String>();
         try {
-            reader = new BufferedReader(new FileReader(filename));
-            String line = reader.readLine();
+            bufferedReader = new BufferedReader(new FileReader(filename));
+            String line = bufferedReader.readLine();
 
             while (line != null) {
                 log.add(line);
-                line = reader.readLine();
+                line = bufferedReader.readLine();
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

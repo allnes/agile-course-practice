@@ -8,6 +8,6 @@ public class ViewModelWithTxtLoggerTests extends ViewModelTests {
     public void setUp() {
         BinaryTreeTxtLogger realLogger =
             new BinaryTreeTxtLogger("./ViewModel_with_TxtLogger_Tests-lab3.log");
-        super.setExternalViewModel(new ViewModel(realLogger));
+        super.setExternalViewModelForStructure(new ViewModel(realLogger));
     }
 }

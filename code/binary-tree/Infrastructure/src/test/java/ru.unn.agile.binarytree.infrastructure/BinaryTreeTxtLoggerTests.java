@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static ru.unn.agile.binarytree.infrastructure.RegexMatcher.matchesPattern;
+import static ru.unn.agile.binarytree.infrastructure.RegexMatcherForBinaryTreeStructure.matchesPattern;
 
 public class BinaryTreeTxtLoggerTests {
     private static final String FILENAME = "./TxtLogger_Tests-lab3.log";

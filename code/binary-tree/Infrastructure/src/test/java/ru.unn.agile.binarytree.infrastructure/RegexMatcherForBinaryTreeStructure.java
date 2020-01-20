@@ -4,15 +4,16 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
-public class RegexMatcher extends BaseMatcher {
+public class RegexMatcherForBinaryTreeStructure extends BaseMatcher {
     private final String regex;
 
-    public RegexMatcher(final String regex) {
+    public RegexMatcherForBinaryTreeStructure(final String regex) {
         this.regex = regex;
     }
 
     public boolean matches(final Object o) {
-        return ((String) o).matches(regex);
+        String obj = (String) o;
+        return obj.matches(regex);
     }
 
     public void describeTo(final Description description) {
@@ -21,7 +22,7 @@ public class RegexMatcher extends BaseMatcher {
     }
 
     public static Matcher<? super String> matchesPattern(final String regex) {
-        RegexMatcher matcher = new RegexMatcher(regex);
+        RegexMatcherForBinaryTreeStructure matcher = new RegexMatcherForBinaryTreeStructure(regex);
         //NOTE: this ugly cast is needed to workaround 'unchecked' Java warning
         @SuppressWarnings (value = "unchecked")
         Matcher<? super String> castedMatcher = (Matcher<? super String>)   matcher;
