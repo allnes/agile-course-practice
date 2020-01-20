@@ -27,7 +27,35 @@ public class ViewModel {
     private final StringProperty removeResult = new SimpleStringProperty();
     private final StringProperty removeStatus = new SimpleStringProperty();
 
+    private final StringProperty logs = new SimpleStringProperty();
+    private ILogger logger;
+
+    public final void setLogger(final ILogger logger) {
+        if (logger == null) {
+            throw new IllegalArgumentException("Logger parameter can't be null");
+        }
+        this.logger = logger;
+    }
+
+    private void updateLogs() {
+        List<String> fullLog = logger.getLogOfBinaryTreeStructure();
+        StringBuilder record = new StringBuilder(new String(""));
+        for (String log : fullLog) {
+            record.append(log).append("\n");
+        }
+        logs.set(record.toString());
+    }
+
     public ViewModel() {
+        init();
+    }
+
+    public ViewModel(final ILogger logger) {
+        setLogger(logger);
+        init();
+    }
+
+    private void init() {
         addKey.set("");
         addValue.set("");
         addStatus.set(Status.WAITING.toString());
@@ -117,8 +145,12 @@ public class ViewModel {
         final String value = addValue.get();
 
         storage.add(key, value);
-
         addStatus.set(Status.SUCCESS.toString());
+
+        String message = LogMessages.ADD_FUNCTION_WAS_PRESSED + " Arguments: key = "
+                + key + "; value = " + value + ".";
+        logger.logOfBinaryTreeStructure(message);
+        updateLogs();
     }
 
     public void find() {
@@ -132,6 +164,11 @@ public class ViewModel {
 
         findResult.set(result);
         findStatus.set(Status.SUCCESS.toString());
+
+        String message = LogMessages.FIND_FUNCTION_WAS_PRESSED
+                + " Result = " + result + ".";
+        logger.logOfBinaryTreeStructure(message);
+        updateLogs();
     }
 
     public void remove() {
@@ -141,6 +178,11 @@ public class ViewModel {
 
         removeResult.set(Boolean.toString(result));
         removeStatus.set(Status.SUCCESS.toString());
+
+        String message = LogMessages.REMOVE_FUNCTION_WAS_PRESSED
+                + " Result = " + result + ".";
+        logger.logOfBinaryTreeStructure(message);
+        updateLogs();
     }
 
     private Status getAddInputStatus() {
@@ -218,4 +260,12 @@ enum Status {
     public String toString() {
         return name;
     }
+}
+
+final class LogMessages {
+    public static final String ADD_FUNCTION_WAS_PRESSED = "Add. ";
+    public static final String FIND_FUNCTION_WAS_PRESSED = "Find. ";
+    public static final String REMOVE_FUNCTION_WAS_PRESSED = "Remove. ";
+
+    private LogMessages() { }
 }

@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import ru.unn.agile.binarytree.viewmodel.ViewModel;
+import ru.unn.agile.binarytree.infrastructure.BinaryTreeTxtLogger;
 
 public class BinaryTree {
     @FXML
@@ -26,8 +27,7 @@ public class BinaryTree {
 
     @FXML
     void initialize() {
-
-        // Two-way binding hasn't supported by FXML yet, so place it in code-behind
+        viewModel = new ViewModel(new BinaryTreeTxtLogger("./binary_tree.log"));
         txtFindKey.textProperty().bindBidirectional(viewModel.findKeyProperty());
         txtAddKey.textProperty().bindBidirectional(viewModel.addKeyProperty());
         txtAddValue.textProperty().bindBidirectional(viewModel.addValueProperty());

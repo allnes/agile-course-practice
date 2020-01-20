@@ -358,6 +358,8 @@ include "code/binary-tree/View"
 project(":code/binary-tree/View").name = "binary-tree-View"
 include "code/binary-tree/ViewModel"
 project(":code/binary-tree/ViewModel").name = "binary-tree-ViewModel"
+include "code/binary-tree/Infrastructure"
+project(":code/binary-tree/Infrastructure").name = "binary-tree-Infrastructure"
 // Stack
 include "code/stack/Model"
 project(":code/stack/Model").name = "stack-Model"

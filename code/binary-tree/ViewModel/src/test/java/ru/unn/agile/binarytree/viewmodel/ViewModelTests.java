@@ -9,9 +9,15 @@ import static org.junit.Assert.*;
 public class ViewModelTests {
     private ViewModel viewModel;
 
+    public void setExternalViewModel(final ViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
     @Before
     public void setUp() {
-        viewModel = new ViewModel();
+        if (viewModel == null) {
+            viewModel = new ViewModel(new FakeLogger());
+        }
     }
 
     @After
@@ -160,5 +166,17 @@ public class ViewModelTests {
         viewModel.remove();
 
         assertTrue(Boolean.parseBoolean(viewModel.removeResultProperty().get()));
+    }
+
+    @Test
+    public void viewModelConstructorThrowsExceptionWithNullLogger() {
+        try {
+            new ViewModel(null);
+            fail("Exception wasn't thrown");
+        } catch (IllegalArgumentException ex) {
+            assertEquals("Logger parameter can't be null", ex.getMessage());
+        } catch (Exception ex) {
+            fail("Invalid exception type");
+        }
     }
 }
