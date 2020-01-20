@@ -47,20 +47,20 @@ public class BinaryTreeTxtLogger implements ILogger {
 
     public List<String> getLogOfBinaryTreeStructure() {
         BufferedReader bufferedReader;
-        ArrayList<String> log = new ArrayList<String>();
+        ArrayList<String> logMessage = new ArrayList<>();
         try {
             bufferedReader = new BufferedReader(new FileReader(filename));
-            String line = bufferedReader.readLine();
+            String bufferLine = bufferedReader.readLine();
 
-            while (line != null) {
-                log.add(line);
-                line = bufferedReader.readLine();
+            while (bufferLine != null) {
+                logMessage.add(bufferLine);
+                bufferLine = bufferedReader.readLine();
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
-        return log;
+        return logMessage;
     }
 
 }
