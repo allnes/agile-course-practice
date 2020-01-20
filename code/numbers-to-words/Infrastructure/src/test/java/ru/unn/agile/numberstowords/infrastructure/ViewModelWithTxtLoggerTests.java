@@ -8,6 +8,6 @@ public class ViewModelWithTxtLoggerTests extends ViewModelTests {
     public void setUp() {
         TxtLogger logger =
                 new TxtLogger("./ViewModelWithTxtLoggerTests.log");
-        super.setViewModel(new ViewModel(logger));
+        super.setViewModelForm(new ViewModel(logger));
     }
 }
